@@ -1,25 +1,24 @@
 require './lib/groupdocs_annotation_cloud/version'
 
-Gem::Specification.new do |spec|
-  spec.name        = 'groupdocs_annotation_cloud'
-  spec.version     = GroupDocsAnnotationCloud::VERSION
-  spec.platform    = Gem::Platform::RUBY
-  spec.license     = 'MIT'
-  spec.summary     = 'GroupDocs.Annotation Cloud Ruby SDK'
-  spec.description = 'Ruby gem for communicating with the GroupDocs.Annotation Cloud API'
-  spec.author      = 'GroupDocs'
-  spec.email       = 'support@groupdocs.cloud'
-  spec.homepage    = 'https://products.groupdocs.cloud/annotation/ruby'
-  spec.metadata    = { 'source_code_uri' => 'https://github.com/groupdocs-annotation-cloud/groupdocs-annotation-cloud-ruby' }
+Gem::Specification.new do |s|
+  s.name        = 'groupdocs_annotation_cloud'
+  s.version     = GroupDocsAnnotationCloud::VERSION
+  s.platform    = Gem::Platform::RUBY
+  s.license     = 'MIT'
+  s.summary     = 'GroupDocs.Annotation Cloud Ruby SDK'
+  s.description = 'Ruby gem for communicating with the GroupDocs.Annotation Cloud API'
+  s.author      = 'GroupDocs'
+  s.email       = 'support@groupdocs.cloud'
+  s.homepage    = 'https://products.groupdocs.cloud/annotation/ruby'
+  s.metadata    = { 'source_code_uri' => 'https://github.com/groupdocs-annotation-cloud/groupdocs-annotation-cloud-ruby' }
 
-  spec.add_runtime_dependency 'faraday', '~> 0.14.0'
-  spec.add_runtime_dependency 'mimemagic', '~> 0.3.2'
-  spec.add_runtime_dependency 'addressable', '~> 2.5.0', '>= 2.5.0'
+  s.add_runtime_dependency 'faraday', '~> 0.14.0'
+  s.add_runtime_dependency 'mimemagic', '~> 0.3.2'
+  s.add_runtime_dependency 'addressable', '~> 2.5.0', '>= 2.5.0'
   
-  spec.add_development_dependency 'groupdocs_storage_cloud', '~> 18.6', '>= 18.5'
-  spec.add_development_dependency 'minitest', '~> 5.11', '>= 5.11.3'
+  s.add_development_dependency 'minitest', '~> 5.11', '>= 5.11.3'
 
-  spec.files         = Dir['lib/**/*.rb']
-  spec.require_paths = ['lib']
-  spec.required_ruby_version = '~> 2.3'
+  s.files         = Dir['lib/**/*.rb']
+  s.require_paths = ['lib']
+  s.required_ruby_version = '~> 2.3'
 end

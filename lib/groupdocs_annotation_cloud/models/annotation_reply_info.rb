@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="annotation_reply_info.rb">
- #   Copyright (c) 2003-2018 Aspose Pty Ltd
+ #   Copyright (c) 2003-2019 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,40 +28,40 @@
 require 'date'
 
 module GroupDocsAnnotationCloud
-  
+  # Describes annotation reply properties
   class AnnotationReplyInfo
 
-    # Gets or sets the unique identifier.
+    # Gets or sets the unique identifier
     attr_accessor :guid
 
-    # Gets or sets the user unique identifier.
+    # Gets or sets the user's unique identifier
     attr_accessor :user_guid
 
-    # Gets or sets the name of the user.
+    # Gets or sets the user's name
     attr_accessor :user_name
 
-    # Gets or sets the user email.
+    # Gets or sets the user email
     attr_accessor :user_email
 
-    # Gets or sets the message.
+    # Gets or sets the message
     attr_accessor :message
 
-    # Gets or sets the replied on.
+    # Gets or sets the reply time
     attr_accessor :replied_on
 
-    # Gets or sets the parent reply unique identifier.
+    # Gets or sets the parent reply unique identifier
     attr_accessor :parent_reply_guid
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'guid' => :'guid',
-        :'user_guid' => :'userGuid',
-        :'user_name' => :'userName',
-        :'user_email' => :'userEmail',
-        :'message' => :'message',
-        :'replied_on' => :'repliedOn',
-        :'parent_reply_guid' => :'parentReplyGuid'
+        :'guid' => :'Guid',
+        :'user_guid' => :'UserGuid',
+        :'user_name' => :'UserName',
+        :'user_email' => :'UserEmail',
+        :'message' => :'Message',
+        :'replied_on' => :'RepliedOn',
+        :'parent_reply_guid' => :'ParentReplyGuid'
       }
     end
 
@@ -160,20 +160,28 @@ module GroupDocsAnnotationCloud
       [guid, user_guid, user_name, user_email, message, replied_on, parent_reply_guid].hash
     end
 
+    # Downcases first letter.
+    # @return downcased string
+    def uncap(str)
+      str[0, 1].downcase + str[1..-1]
+    end
+
     # Builds the object from hash
     # @param [Hash] attributes Model attributes in the form of hash
     # @return [Object] Returns the model itself
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
+        pname = uncap(self.class.attribute_map[key]).intern
+        value = attributes[pname]
         if type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the the attribute
-          # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map { |v| _deserialize($1, v) })
+          # is documented as an array but the input is not                    
+          if value.is_a?(Array)
+            self.send("#{key}=", value.map { |v| _deserialize($1, v) })
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
+        elsif !value.nil?
+          self.send("#{key}=", _deserialize(type, value))
         end
         # or else data not found in attributes(hash), not an issue as the data can be optional
       end
@@ -188,9 +196,9 @@ module GroupDocsAnnotationCloud
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
-        Time.at(/\d/.match(value)[0].to_f).to_datetime
+        Date.parse value
       when :Date
-        Time.at(/\d/.match(value)[0].to_f).to_date
+        Date.parse value
       when :String
         value.to_s
       when :Integer

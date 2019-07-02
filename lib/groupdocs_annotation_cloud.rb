@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="groupdocs_annotation_cloud.rb">
-#   Copyright (c) 2003-2018 Aspose Pty Ltd
+#   Copyright (c) 2003-2019 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,49 +32,33 @@ require_relative 'groupdocs_annotation_cloud/configuration'
 # Models
 require_relative 'groupdocs_annotation_cloud/models/annotation_info'
 require_relative 'groupdocs_annotation_cloud/models/annotation_reply_info'
+require_relative 'groupdocs_annotation_cloud/models/disc_usage'
 require_relative 'groupdocs_annotation_cloud/models/document_info'
-require_relative 'groupdocs_annotation_cloud/models/image_pages'
+require_relative 'groupdocs_annotation_cloud/models/error'
+require_relative 'groupdocs_annotation_cloud/models/error_details'
+require_relative 'groupdocs_annotation_cloud/models/file_versions'
+require_relative 'groupdocs_annotation_cloud/models/files_list'
+require_relative 'groupdocs_annotation_cloud/models/files_upload_result'
+require_relative 'groupdocs_annotation_cloud/models/format'
+require_relative 'groupdocs_annotation_cloud/models/formats_result'
 require_relative 'groupdocs_annotation_cloud/models/link'
 require_relative 'groupdocs_annotation_cloud/models/link_element'
+require_relative 'groupdocs_annotation_cloud/models/object_exist'
+require_relative 'groupdocs_annotation_cloud/models/page_images'
 require_relative 'groupdocs_annotation_cloud/models/page_info'
-require_relative 'groupdocs_annotation_cloud/models/row_info'
-require_relative 'groupdocs_annotation_cloud/models/value_type'
-require_relative 'groupdocs_annotation_cloud/models/annotation_api_link'
-require_relative 'groupdocs_annotation_cloud/models/image_page'
 require_relative 'groupdocs_annotation_cloud/models/point'
 require_relative 'groupdocs_annotation_cloud/models/rectangle'
+require_relative 'groupdocs_annotation_cloud/models/row_info'
+require_relative 'groupdocs_annotation_cloud/models/storage_exist'
+require_relative 'groupdocs_annotation_cloud/models/storage_file'
+require_relative 'groupdocs_annotation_cloud/models/annotation_api_link'
+require_relative 'groupdocs_annotation_cloud/models/file_version'
+require_relative 'groupdocs_annotation_cloud/models/page_image'
 
 # APIs
-require_relative 'groupdocs_annotation_cloud/api/annotation_api'
-require_relative 'groupdocs_annotation_cloud/api/image_info_api'
-require_relative 'groupdocs_annotation_cloud/api/image_pages_api'
-require_relative 'groupdocs_annotation_cloud/api/pdf_file_api'
-
-module GroupDocsAnnotationCloud
-  # Main module
-  class << self
-    # Initialize SDK with API keys.
-    # 
-    # app_sid = "xxx"
-    # app_key = "xxx"
-    #
-    # GroupDocsAnnotationCloud.from_keys(app_sid, app_key)
-    def from_keys(app_sid, app_key)
-      AnnotationApi.from_keys(app_sid, app_key)
-    end
-
-    # Initialize SDK with Configuration.
-    # 
-    # app_sid = "xxx"
-    # app_key = "xxx"
-    #
-    # config = GroupDocsAnnotationCloud::Configuration.new(app_sid, app_key)
-    # config.debugging = true
-    # config.temp_folder_path = "./temp"
-    #
-    # GroupDocsAnnotationCloud.from_config(config)
-    def from_config(config)
-      AnnotationApi.from_config(config)
-    end
-  end
-end
+require_relative 'groupdocs_annotation_cloud/api/annotate_api'
+require_relative 'groupdocs_annotation_cloud/api/file_api'
+require_relative 'groupdocs_annotation_cloud/api/folder_api'
+require_relative 'groupdocs_annotation_cloud/api/info_api'
+require_relative 'groupdocs_annotation_cloud/api/preview_api'
+require_relative 'groupdocs_annotation_cloud/api/storage_api'

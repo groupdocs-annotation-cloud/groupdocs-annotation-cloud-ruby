@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="api_client.rb">
-#   Copyright (c) 2003-2018 Aspose Pty Ltd
+#   Copyright (c) 2003-2019 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -51,7 +51,7 @@ module GroupDocsAnnotationCloud
     def initialize(config)
       @config = config
       @default_headers = {
-        'Content-Type' => "application/json",
+        'Content-Type' => config.api_version == '' ? "application/x-www-form-urlencoded" : "application/json",
         'x-groupdocs-client' => "ruby sdk",
         'x-groupdocs-version' => GroupDocsAnnotationCloud::VERSION.to_s
       }
@@ -69,18 +69,8 @@ module GroupDocsAnnotationCloud
       end
 
       unless response.success?
-        if response.status == 0
-          # Errors from libcurl will be made visible here
-          raise ApiError.new(:code => 0,
-                            :message => response.reason_phrase)
-        else
-          raise ApiError.new(:code => response.status,
-                            :response_headers => response.headers,
-                            :response_body => response.body),
-               response.reason_phrase
-        end
+        raise ApiError.new(:code => response.status, :response_body => response.body)
       end
-
       
       data = deserialize(response, opts[:return_type]) if opts[:return_type]
       [data, response.status, response.headers]
@@ -250,7 +240,7 @@ module GroupDocsAnnotationCloud
       encoding = response.body.encoding
       tempfile = Tempfile.open(prefix, @config.temp_folder_path, encoding: encoding)
       @tempfile = tempfile
-      IO.binwrite(tempfile, response.body)
+      tempfile.write(response.body)
       response.on_complete do |resp|
         tempfile.close
         @config.logger.info "Temp file written to #{tempfile.path}, please copy the file to a proper folder "\
@@ -283,7 +273,9 @@ module GroupDocsAnnotationCloud
     # @return [String] HTTP body data in the form of string
     def build_request_body(header_params, form_params, body)
       # http form
-      if header_params['Content-Type'] == 'application/x-www-form-urlencoded' ||
+      if body
+        data = body.is_a?(String) ? body : body.to_json      
+      elsif header_params['Content-Type'] == 'application/x-www-form-urlencoded' ||
           header_params['Content-Type'] == 'multipart/form-data'
         data = {}
         form_params.each do |key, value|
@@ -296,8 +288,6 @@ module GroupDocsAnnotationCloud
             data[key] = value.to_s
           end
         end
-      elsif body
-        data = body.is_a?(String) ? body : body.to_json
       else
         data = nil
       end

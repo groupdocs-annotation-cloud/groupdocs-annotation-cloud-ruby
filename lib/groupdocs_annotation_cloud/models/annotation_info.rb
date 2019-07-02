@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="annotation_info.rb">
- #   Copyright (c) 2003-2018 Aspose Pty Ltd
+ #   Copyright (c) 2003-2019 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,74 +28,80 @@
 require 'date'
 
 module GroupDocsAnnotationCloud
-  
+  # Describes annotation properties
   class AnnotationInfo
 
-    # Gets or sets the unique identifier.
+    # Gets or sets the unique identifier
     attr_accessor :guid
 
-    # Gets or sets the document unique identifier.
+    # Gets or sets the document unique identifier
     attr_accessor :document_guid
 
-    # Gets or sets the text.
+    # Gets or sets the annotation text
     attr_accessor :text
 
-    # Gets or sets the creator unique identifier.
+    # Gets or sets the creator unique identifier
     attr_accessor :creator_guid
 
-    # Gets or sets the name of the creator.
+    # Gets or sets the name of the creator
     attr_accessor :creator_name
 
-    # Gets or sets the creator email.
+    # Gets or sets the creator's email
     attr_accessor :creator_email
 
-    # Gets or sets the box.
+    # Gets or sets the box where annotation will be placed
     attr_accessor :box
 
-    # Gets or sets the page number.
+    # Gets or sets the number of page where annotation will be placed
     attr_accessor :page_number
 
-    # Gets or sets the annotation position.
+    # Gets or sets the annotation position
     attr_accessor :annotation_position
 
-    # Gets or sets the SVG path.
+    # Gets or sets the annotation SVG path
     attr_accessor :svg_path
 
-    # Gets or sets the type.
+    # Gets or sets the annotation type
     attr_accessor :type
 
-    # Gets or sets the access.
+    # Gets or sets the annotation access
     attr_accessor :access
 
-    # Gets or sets the replies.
+    # Gets or sets the array of annotation replies
     attr_accessor :replies
 
-    # Gets or sets the created on.
+    # Gets or sets the annotation created on date
     attr_accessor :created_on
 
-    # Gets or sets the color of the font.
+    # Gets or sets the annotation's font color
     attr_accessor :font_color
 
-    # Gets or sets the color of the pen.
+    # Gets or sets the annotation's pen color
     attr_accessor :pen_color
 
-    # Gets or sets the width of the pen.
+    # Gets or sets the annotation's pen width
     attr_accessor :pen_width
 
-    # Gets or sets the pen style.
+    # Gets or sets the annotation's pen style
     attr_accessor :pen_style
 
-    # Gets or sets the color of the background.
+    # Gets or sets the annotation's background color 
     attr_accessor :background_color
 
-    # Gets or sets the field text.
+    # Gets or sets the annotation's field text
     attr_accessor :field_text
 
-    # Gets or sets the font family.
+    # Gets or sets the annotation's font family
     attr_accessor :font_family
 
-    # Gets or sets the size of the font.
+    # Gets or sets the annotation's font size 
     attr_accessor :font_size
+
+    # Gets or sets the annotation's opacity
+    attr_accessor :opacity
+
+    # Gets or sets the watermark annotation's rotation angle
+    attr_accessor :angle
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -121,28 +127,30 @@ module GroupDocsAnnotationCloud
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'guid' => :'guid',
-        :'document_guid' => :'documentGuid',
-        :'text' => :'text',
-        :'creator_guid' => :'creatorGuid',
-        :'creator_name' => :'creatorName',
-        :'creator_email' => :'creatorEmail',
-        :'box' => :'box',
-        :'page_number' => :'pageNumber',
-        :'annotation_position' => :'annotationPosition',
-        :'svg_path' => :'svgPath',
-        :'type' => :'type',
-        :'access' => :'access',
-        :'replies' => :'replies',
-        :'created_on' => :'createdOn',
-        :'font_color' => :'fontColor',
-        :'pen_color' => :'penColor',
-        :'pen_width' => :'penWidth',
-        :'pen_style' => :'penStyle',
-        :'background_color' => :'backgroundColor',
-        :'field_text' => :'fieldText',
-        :'font_family' => :'fontFamily',
-        :'font_size' => :'fontSize'
+        :'guid' => :'Guid',
+        :'document_guid' => :'DocumentGuid',
+        :'text' => :'Text',
+        :'creator_guid' => :'CreatorGuid',
+        :'creator_name' => :'CreatorName',
+        :'creator_email' => :'CreatorEmail',
+        :'box' => :'Box',
+        :'page_number' => :'PageNumber',
+        :'annotation_position' => :'AnnotationPosition',
+        :'svg_path' => :'SvgPath',
+        :'type' => :'Type',
+        :'access' => :'Access',
+        :'replies' => :'Replies',
+        :'created_on' => :'CreatedOn',
+        :'font_color' => :'FontColor',
+        :'pen_color' => :'PenColor',
+        :'pen_width' => :'PenWidth',
+        :'pen_style' => :'PenStyle',
+        :'background_color' => :'BackgroundColor',
+        :'field_text' => :'FieldText',
+        :'font_family' => :'FontFamily',
+        :'font_size' => :'FontSize',
+        :'opacity' => :'Opacity',
+        :'angle' => :'Angle'
       }
     end
 
@@ -170,7 +178,9 @@ module GroupDocsAnnotationCloud
         :'background_color' => :'Integer',
         :'field_text' => :'String',
         :'font_family' => :'String',
-        :'font_size' => :'Float'
+        :'font_size' => :'Float',
+        :'opacity' => :'Float',
+        :'angle' => :'Float'
       }
     end
 
@@ -272,6 +282,14 @@ module GroupDocsAnnotationCloud
         self.font_size = attributes[:'FontSize']
       end
 
+      if attributes.key?(:'Opacity')
+        self.opacity = attributes[:'Opacity']
+      end
+
+      if attributes.key?(:'Angle')
+        self.angle = attributes[:'Angle']
+      end
+
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -294,10 +312,6 @@ module GroupDocsAnnotationCloud
         invalid_properties.push("invalid value for 'created_on', created_on cannot be nil.")
       end
 
-      if @font_color.nil?
-        invalid_properties.push("invalid value for 'font_color', font_color cannot be nil.")
-      end
-
       return invalid_properties
     end
 
@@ -307,25 +321,25 @@ module GroupDocsAnnotationCloud
       return false if @document_guid.nil?
       return false if @box.nil?
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["Text", "Area", "Point", "TextStrikeout", "Polyline", "TextField", "Watermark", "TextReplacement", "Arrow", "TextRedaction", "ResourcesRedaction", "TextUnderline", "Distance"])
+      type_validator = EnumAttributeValidator.new('String', ["Text", "Area", "Point", "TextStrikeout", "Polyline", "TextField", "Watermark", "TextReplacement", "Arrow", "TextRedaction", "ResourcesRedaction", "TextUnderline", "Distance", "Ellipse"])
       return false unless type_validator.valid?(@type)
       access_validator = EnumAttributeValidator.new('String', ["Public", "Private"])
       return false unless access_validator.valid?(@access)
       return false if @created_on.nil?
-      return false if @font_color.nil?
       return true
     end
 
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["Text", "Area", "Point", "TextStrikeout", "Polyline", "TextField", "Watermark", "TextReplacement", "Arrow", "TextRedaction", "ResourcesRedaction", "TextUnderline", "Distance"])
-      if validator.valid?(type)
+      validator = EnumAttributeValidator.new('String', ["Text", "Area", "Point", "TextStrikeout", "Polyline", "TextField", "Watermark", "TextReplacement", "Arrow", "TextRedaction", "ResourcesRedaction", "TextUnderline", "Distance", "Ellipse"])
+      if type.to_i == 0
+        unless validator.valid?(type)
+          raise ArgumentError, "invalid value for 'type', must be one of #{validator.allowable_values}."
+        end
         @type = type
-      elsif type.to_i >= 0 && type.to_i < validator.allowable_values.count
-        @type = validator.allowable_values[type.to_i]
       else
-        raise ArgumentError, "invalid value for 'type', must be one of #{validator.allowable_values}."
+        @type = validator.allowable_values[type.to_i]
       end
     end
 
@@ -333,12 +347,13 @@ module GroupDocsAnnotationCloud
     # @param [Object] access Object to be assigned
     def access=(access)
       validator = EnumAttributeValidator.new('String', ["Public", "Private"])
-      if validator.valid?(access)
+      if access.to_i == 0
+        unless validator.valid?(access)
+          raise ArgumentError, "invalid value for 'access', must be one of #{validator.allowable_values}."
+        end
         @access = access
-      elsif access.to_i >= 0 && access.to_i < validator.allowable_values.count
-        @access = validator.allowable_values[access.to_i]
       else
-        raise ArgumentError, "invalid value for 'access', must be one of #{validator.allowable_values}."
+        @access = validator.allowable_values[access.to_i]
       end
     end
 
@@ -368,7 +383,9 @@ module GroupDocsAnnotationCloud
           background_color == other.background_color &&
           field_text == other.field_text &&
           font_family == other.font_family &&
-          font_size == other.font_size
+          font_size == other.font_size &&
+          opacity == other.opacity &&
+          angle == other.angle
     end
 
     # @see the `==` method
@@ -380,7 +397,13 @@ module GroupDocsAnnotationCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [guid, document_guid, text, creator_guid, creator_name, creator_email, box, page_number, annotation_position, svg_path, type, access, replies, created_on, font_color, pen_color, pen_width, pen_style, background_color, field_text, font_family, font_size].hash
+      [guid, document_guid, text, creator_guid, creator_name, creator_email, box, page_number, annotation_position, svg_path, type, access, replies, created_on, font_color, pen_color, pen_width, pen_style, background_color, field_text, font_family, font_size, opacity, angle].hash
+    end
+
+    # Downcases first letter.
+    # @return downcased string
+    def uncap(str)
+      str[0, 1].downcase + str[1..-1]
     end
 
     # Builds the object from hash
@@ -389,14 +412,16 @@ module GroupDocsAnnotationCloud
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
+        pname = uncap(self.class.attribute_map[key]).intern
+        value = attributes[pname]
         if type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the the attribute
-          # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map { |v| _deserialize($1, v) })
+          # is documented as an array but the input is not                    
+          if value.is_a?(Array)
+            self.send("#{key}=", value.map { |v| _deserialize($1, v) })
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
+        elsif !value.nil?
+          self.send("#{key}=", _deserialize(type, value))
         end
         # or else data not found in attributes(hash), not an issue as the data can be optional
       end
@@ -411,9 +436,9 @@ module GroupDocsAnnotationCloud
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
-        Time.at(/\d/.match(value)[0].to_f).to_datetime
+        Date.parse value
       when :Date
-        Time.at(/\d/.match(value)[0].to_f).to_date
+        Date.parse value
       when :String
         value.to_s
       when :Integer
@@ -466,17 +491,7 @@ module GroupDocsAnnotationCloud
       self.class.attribute_map.each_pair do |attr, param|
         value = self.send(attr)
         next if value.nil?
-        if attr == :type
-          validator = EnumAttributeValidator.new('String', ["Text", "Area", "Point", "TextStrikeout", "Polyline", "TextField", "Watermark", "TextReplacement", "Arrow", "TextRedaction", "ResourcesRedaction", "TextUnderline", "Distance"])
-          value = validator.allowable_values.index(value)
-          hash[param] = _to_hash(value)
-        elsif attr == :access
-          validator = EnumAttributeValidator.new('String', ["Public", "Private"])
-          value = validator.allowable_values.index(value)
-          hash[param] = _to_hash(value)
-        else
-          hash[param] = _to_hash(value)
-        end
+        hash[param] = _to_hash(value)
       end
       hash
     end

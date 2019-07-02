@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="test_contex.rb">
-#    Copyright (c) 2003-2018 Aspose Pty Ltd
+#    Copyright (c) 2003-2019 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,90 +24,67 @@
 # </summary>
 # --------------------------------------------------------------------------------------------------------------------
 #
-module GroupDocsAnnotationCloud
+module GroupDocsAnnotationCloud  
+    
+  require 'openssl'    
+    OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 
-  require "minitest/autorun"
-  require "minitest/unit"
-  require 'groupdocs_storage_cloud'
+    require "minitest/autorun"
+    require "minitest/unit"
 
-  require_relative './../lib/groupdocs_annotation_cloud'
-  require_relative './test_settings'
+    require_relative './../lib/groupdocs_annotation_cloud'
+    require_relative './test_settings'
+    require_relative './test_file'    
 
-  class TestContext < Minitest::Test
+    class TestContext < Minitest::Test
 
-    include GroupDocsStorageCloud
-    include MiniTest::Assertions
+      include MiniTest::Assertions
 
-    @@test_files_uploaded ||= false
+      @@test_files_uploaded ||= false
 
-    def setup
-      init_annotation_api
-      init_storage_api
-      upload_test_files
-    end
+      def setup
+        config = Configuration.new(TestSettings::APP_SID, TestSettings::APP_KEY)
+        config.api_base_url = TestSettings::API_BASE_URL
+        #config.debugging = true
 
-    def teardown
-      remove_folder_in_storage "cache"
-      remove_folder_in_storage "tests"
-    end
+        @info_api = InfoApi.from_config(config)
+        @preview_api = PreviewApi.from_config(config)
+        @annotate_api = AnnotateApi.from_config(config)
+        @storage_api = StorageApi.from_config(config)   
+        @folder_api = FolderApi.from_config(config)   
+        @file_api = FileApi.from_config(config)   
 
-    def init_annotation_api
-      config = Configuration.new(TestSettings::APP_SID, TestSettings::APP_KEY)
-      config.api_base_url = TestSettings::API_BASE_URL
-
-      @annotation_api = AnnotationApi.from_config(config)
-      @image_info_api = ImageInfoApi.from_config(config)
-      @image_pages_api = ImagePagesApi.from_config(config)
-      @pdf_file_api = PdfFileApi.from_config(config)
-    end
-
-    def init_storage_api
-      GroupDocsStorageCloud.configure do |conf|
-        conf.api_key['api_key'] = TestSettings::APP_KEY
-        conf.api_key['app_sid'] = TestSettings::APP_SID
-        conf.host = TestSettings::API_BASE_URL
+        upload_test_files()
       end
 
-      @storage_api = StorageApi.new
-    end
+      def teardown 
+        # remove_folder_in_storage "annotation"
+      end
 
-    def remove_folder_in_storage(folder)
-      request = DeleteFolderRequest.new(folder, nil, true)
-      @storage_api.delete_folder request
-    end
+      def remove_folder_in_storage(folder)
+        request = DeleteFolderRequest.new(folder, nil, true)
+        @folder_api.delete_folder request
+      end
 
-    def upload_test_files
-      unless @@test_files_uploaded then
-        test_file_path = File.dirname(__FILE__) + "./test_files/"
-        test_files = list_files test_file_path
+      def upload_test_files
+        unless @@test_files_uploaded then
+          test_file_path = "test\\test_files\\"
 
-        test_files.each do |file_path|
-          remote_file_path = file_path.sub(test_file_path, "")
-          test_file = File.open(file_path, "r").read
+          TestFile.test_files_list_upload.each do |test_file|
 
-          file_exist_request = GetIsExistRequest.new remote_file_path
-          file_exist_response = @storage_api.get_is_exist file_exist_request
-
-          if !file_exist_response.file_exist.is_exist then
-            upload_file_request = PutCreateRequest.new remote_file_path, test_file
-            @storage_api.put_create upload_file_request
+            exist_request = ObjectExistsRequest.new(test_file.path)
+            exist_response = @storage_api.object_exists(exist_request)            
+            
+            if !exist_response.exists then
+              @storage_api.config.logger.debug "Uploading: " + test_file.path
+              file = File.open(test_file_path + test_file.path, "r")
+              upload_request = UploadFileRequest.new test_file.path, file
+              @file_api.upload_file(upload_request)
+            end
           end
+          @@test_files_uploaded = true
         end
-        @@test_files_uploaded = true
       end
+
     end
-
-    def list_files(base_path)
-      Dir.glob("#{base_path}**/*").select { |path| File.file? path }
-    end
-
-    def get_test_file(file)
-      base_path = File.dirname(__FILE__) + "/test_files"
-      test_file_folder = file.folder.sub("\\", "/")
-      test_file_path = "#{base_path}/#{test_file_folder}/#{file.file_name}"
-
-      File.open(test_file_path, "r")
-    end
-
-  end
 end

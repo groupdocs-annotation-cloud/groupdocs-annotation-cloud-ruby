@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="test_file.rb">
-#    Copyright (c) 2003-2018 Aspose Pty Ltd
+#    Copyright (c) 2003-2019 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -26,110 +26,232 @@
 #
 
 module GroupDocsAnnotationCloud
-  class TestFile
-    attr_accessor :file_name;
-    attr_accessor :folder;
-    attr_accessor :password;
-    attr_accessor :url;
-    attr_accessor :attachment_name;
-    attr_accessor :attachment_password;
+    class TestFile
+        attr_accessor :file_name;
+        attr_accessor :folder;
+        attr_accessor :password;
+        
+        def path
+            folder + file_name
+        end       
 
-    def self.one_page_djvu
-      f = TestFile.new
-      f.file_name = "one-page.djvu"
-      f.folder = "gfc-testdata\\testsdata\\groupdocs.annotation"
-      f
-    end
+        def self.OnePageCells
+            f = TestFile.new
+            f.file_name = "one-page.xlsx"
+            f.folder = "cells\\"
+            f
+        end
 
-    def self.one_page_docx
-      f = TestFile.new
-      f.file_name = "one-page.docx"
-      f.folder = "gfc-testdata\\testsdata\\groupdocs.annotation"
-      f
-    end
+        def self.TenPagesCells
+            f = TestFile.new
+            f.file_name = "ten-pages.xlsx"
+            f.folder = "cells\\"
+            f
+        end
 
-    def self.one_page_emlx
-      f = TestFile.new
-      f.file_name = "one-page.emlx"
-      f.folder = "gfc-testdata\\testsdata\\groupdocs.annotation"
-      f
-    end
+        def self.OnePagePasswordCells
+            f = TestFile.new
+            f.file_name = "one-page-password.xlsx"
+            f.folder = "cells\\"
+            f.password = "password"
+            f
+        end
 
-    def self.one_page_html
-      f = TestFile.new
-      f.file_name = "one-page.html"
-      f.folder = "gfc-testdata\\testsdata\\groupdocs.annotation"
-      f
-    end
+        def self.OnePageDiagram
+            f = TestFile.new
+            f.file_name = "one-page.vsd"
+            f.folder = "diagram\\"
+            f
+        end
 
-    def self.one_page_pdf
-      f = TestFile.new
-      f.file_name = "one-page.pdf"
-      f.folder = "gfc-testdata\\testsdata\\groupdocs.annotation"
-      f
-    end
+        def self.TenPagesDiagram
+            f = TestFile.new
+            f.file_name = "ten-pages.vsd"
+            f.folder = "diagram\\"
+            f
+        end
 
-    def self.one_page_pptx
-      f = TestFile.new
-      f.file_name = "one-page.pptx"
-      f.folder = "gfc-testdata\\testsdata\\groupdocs.annotation"
-      f
-    end
+        def self.OnePageEmail
+            f = TestFile.new
+            f.file_name = "one-page.emlx"
+            f.folder = "email\\"
+            f
+        end
 
-    def self.one_page_annotated_docx
-      f = TestFile.new
-      f.file_name = "one-page-annotated.docx"
-      f.folder = "gfc-testdata\\testsdata\\groupdocs.annotation"
-      f
-    end
+        def self.OnePageHtml
+            f = TestFile.new
+            f.file_name = "one-page.html"
+            f.folder = "html\\"
+            f
+        end
 
-    def self.one_page_annotated_html
-      f = TestFile.new
-      f.file_name = "one-page-annotated.html"
-      f.folder = "gfc-testdata\\testsdata\\groupdocs.annotation"
-      f
-    end
+        def self.OnePageBmp
+            f = TestFile.new
+            f.file_name = "one-page.bmp"
+            f.folder = "images\\"
+            f
+        end
 
-    def self.one_page_annotated_pdf
-      f = TestFile.new
-      f.file_name = "one-page-annotated.pdf"
-      f.folder = "gfc-testdata\\testsdata\\groupdocs.annotation"
-      f
-    end
+        def self.OnePagePng
+            f = TestFile.new
+            f.file_name = "one-page.png"
+            f.folder = "images\\"
+            f
+        end
 
-    def self.one_page_annotated_pptx
-      f = TestFile.new
-      f.file_name = "one-page-annotated.pptx"
-      f.folder = "gfc-testdata\\testsdata\\groupdocs.annotation"
-      f
-    end
+        def self.OnePagePdf
+            f = TestFile.new
+            f.file_name = "one-page.pdf"
+            f.folder = "pdf\\"
+            f
+        end
 
-    def self.test_png
-      f = TestFile.new
-      f.file_name = "test.png"
-      f.folder = "gfc-testdata\\testsdata\\groupdocs.annotation"
-      f
-    end
+        def self.OnePagePasswordPdf
+            f = TestFile.new
+            f.file_name = "one-page-password.pdf"
+            f.folder = "pdf\\"
+            f.password = "password"
+            f
+        end
 
-    def self.two_page_docx
-      f = TestFile.new
-      f.file_name = "two-page.docx"
-      f.folder = "gfc-testdata\\testsdata\\groupdocs.annotation"
-      f
-    end
+        def self.TenPagesPdf
+            f = TestFile.new
+            f.file_name = "ten-pages.pdf"
+            f.folder = "pdf\\"
+            f
+        end       
 
-    def self.words_one_page_docx
-      f = TestFile.new
-      f.file_name = "one-page.docx"
-      f.folder = "gfc-testdata\\testsdata\\groupdocs.annotation\\words"
-      f
-    end
+        def self.OnePageSlides
+            f = TestFile.new
+            f.file_name = "one-page.pptx"
+            f.folder = "slides\\"
+            f
+        end
 
-    def self.words_two_page_docx
-      f = TestFile.new
-      f.file_name = "two-page.docx"
-      f.folder = "gfc-testdata\\testsdata\\groupdocs.annotation\\words"
-      f
+        def self.OnePagePasswordSlides
+            f = TestFile.new
+            f.file_name = "one-page-password.pptx"
+            f.folder = "slides\\"
+            f.password = "password"
+            f
+        end
+
+        def self.TenPagesSlides
+            f = TestFile.new
+            f.file_name = "ten-pages.pptx"
+            f.folder = "slides\\"
+            f
+        end
+
+        def self.OnePageWords
+            f = TestFile.new
+            f.file_name = "one-page.docx"
+            f.folder = "words\\"
+            f
+        end
+
+        def self.OnePagePasswordWords
+            f = TestFile.new
+            f.file_name = "one-page-password.docx"
+            f.folder = "words\\"
+            f.password = "password"
+            f
+        end
+
+        def self.TenPagesWords
+            f = TestFile.new
+            f.file_name = "ten-pages.docx"
+            f.folder = "words\\"
+            f
+        end        
+
+
+        def self.test_files_list_upload
+            [
+                self.OnePageCells,
+                self.TenPagesCells,
+                self.OnePagePasswordCells,                
+                self.OnePageDiagram,
+                self.TenPagesDiagram,
+                self.OnePageEmail,
+                self.OnePageHtml,
+                self.OnePageBmp,
+                self.OnePagePng,
+                self.OnePagePdf,
+                self.OnePagePasswordPdf,
+                self.TenPagesPdf,
+                self.OnePageSlides,
+                self.OnePagePasswordSlides,
+                self.TenPagesSlides,
+                self.OnePageWords,
+                self.OnePagePasswordWords,
+                self.TenPagesWords
+            ]        
+        end
+
+        def self.test_files_list_preview
+            [
+                self.OnePageCells,
+                self.TenPagesCells,
+                self.OnePageDiagram,
+                self.TenPagesDiagram,
+                self.OnePageEmail,
+                self.OnePageHtml,
+                self.OnePageBmp,
+                self.OnePagePng,
+                self.OnePagePdf,
+                self.OnePagePasswordPdf,
+                self.TenPagesPdf,
+                self.OnePageSlides,
+                self.TenPagesSlides,
+                self.OnePageWords
+            ]        
+        end
+
+        def self.test_files_list
+            [
+                self.OnePageDiagram,
+                self.TenPagesDiagram,
+                self.OnePageEmail,
+                self.OnePageBmp,
+                self.OnePagePng,
+                self.OnePagePdf,
+                self.OnePagePasswordPdf,
+                self.OnePageSlides,
+                self.OnePagePasswordSlides,
+                self.TenPagesSlides,
+                self.OnePageWords,
+                self.OnePagePasswordWords,
+                self.TenPagesWords
+            ]        
+        end        
+
+        def self.test_files_list_no_password
+            [
+                self.OnePageCells,
+                self.TenPagesCells,
+                self.OnePageDiagram,
+                self.TenPagesDiagram,
+                self.OnePageEmail,
+                self.OnePageHtml,
+                self.OnePageBmp,
+                self.OnePagePng,
+                self.OnePagePdf,
+                self.TenPagesPdf,
+                self.OnePageSlides,
+                self.TenPagesSlides,
+                self.OnePageWords,
+                self.TenPagesWords
+            ]        
+        end  
+        
+        def self.test_files_list_many_pages
+            [
+                self.TenPagesDiagram,
+                #self.TenPagesPdf,
+                self.TenPagesSlides
+                #self.TenPagesWords
+            ]        
+        end         
     end
-  end
 end

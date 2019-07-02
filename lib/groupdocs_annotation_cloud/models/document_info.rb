@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="document_info.rb">
- #   Copyright (c) 2003-2018 Aspose Pty Ltd
+ #   Copyright (c) 2003-2019 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,26 +28,40 @@
 require 'date'
 
 module GroupDocsAnnotationCloud
-  
+  # Describes document basic info
   class DocumentInfo
+
+    # Gets or sets the document name
     attr_accessor :name
-    attr_accessor :folder
+
+    # Gets or sets the document path
+    attr_accessor :path
+
+    # Gets or sets the document extension
     attr_accessor :extension
+
+    # Gets or sets the file format
     attr_accessor :file_format
+
+    # Gets or sets the document size
     attr_accessor :size
+
+    # Gets or sets the document date modified
     attr_accessor :date_modified
+
+    # Gets or sets the pages
     attr_accessor :pages
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'name' => :'name',
-        :'folder' => :'folder',
-        :'extension' => :'extension',
-        :'file_format' => :'fileFormat',
-        :'size' => :'size',
-        :'date_modified' => :'dateModified',
-        :'pages' => :'pages'
+        :'name' => :'Name',
+        :'path' => :'Path',
+        :'extension' => :'Extension',
+        :'file_format' => :'FileFormat',
+        :'size' => :'Size',
+        :'date_modified' => :'DateModified',
+        :'pages' => :'Pages'
       }
     end
 
@@ -55,7 +69,7 @@ module GroupDocsAnnotationCloud
     def self.swagger_types
       {
         :'name' => :'String',
-        :'folder' => :'String',
+        :'path' => :'String',
         :'extension' => :'String',
         :'file_format' => :'String',
         :'size' => :'Integer',
@@ -76,8 +90,8 @@ module GroupDocsAnnotationCloud
         self.name = attributes[:'Name']
       end
 
-      if attributes.key?(:'Folder')
-        self.folder = attributes[:'Folder']
+      if attributes.key?(:'Path')
+        self.path = attributes[:'Path']
       end
 
       if attributes.key?(:'Extension')
@@ -133,7 +147,7 @@ module GroupDocsAnnotationCloud
       return true if self.equal?(other)
       self.class == other.class &&
           name == other.name &&
-          folder == other.folder &&
+          path == other.path &&
           extension == other.extension &&
           file_format == other.file_format &&
           size == other.size &&
@@ -150,7 +164,13 @@ module GroupDocsAnnotationCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [name, folder, extension, file_format, size, date_modified, pages].hash
+      [name, path, extension, file_format, size, date_modified, pages].hash
+    end
+
+    # Downcases first letter.
+    # @return downcased string
+    def uncap(str)
+      str[0, 1].downcase + str[1..-1]
     end
 
     # Builds the object from hash
@@ -159,14 +179,16 @@ module GroupDocsAnnotationCloud
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
+        pname = uncap(self.class.attribute_map[key]).intern
+        value = attributes[pname]
         if type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the the attribute
-          # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map { |v| _deserialize($1, v) })
+          # is documented as an array but the input is not                    
+          if value.is_a?(Array)
+            self.send("#{key}=", value.map { |v| _deserialize($1, v) })
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
+        elsif !value.nil?
+          self.send("#{key}=", _deserialize(type, value))
         end
         # or else data not found in attributes(hash), not an issue as the data can be optional
       end
@@ -181,9 +203,9 @@ module GroupDocsAnnotationCloud
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
-        Time.at(/\d/.match(value)[0].to_f).to_datetime
+        Date.parse value
       when :Date
-        Time.at(/\d/.match(value)[0].to_f).to_date
+        Date.parse value
       when :String
         value.to_s
       when :Integer

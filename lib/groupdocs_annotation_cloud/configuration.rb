@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="configuration.rb">
-#   Copyright (c) 2003-2018 Aspose Pty Ltd
+#   Copyright (c) 2003-2019 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,7 +34,7 @@ module GroupDocsAnnotationCloud
     # @return [String] Api base url
     attr_accessor :api_base_url
 
-    # Api version, default is '/v1'
+    # Api version, default is '/v2.0'
     #
     # @return [String] Api version
     attr_accessor :api_version
@@ -81,7 +81,7 @@ module GroupDocsAnnotationCloud
     # @return [Configuration] New instance of Configuration
     def initialize(app_sid, app_key)
       @api_base_url = "https://api.groupdocs.cloud"
-      @api_version = '/v1'
+      @api_version = '/v2.0'
       @app_sid = app_sid
       @app_key = app_key
       @client_side_validation = true

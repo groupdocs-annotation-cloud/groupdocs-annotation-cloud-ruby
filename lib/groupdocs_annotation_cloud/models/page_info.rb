@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="page_info.rb">
- #   Copyright (c) 2003-2018 Aspose Pty Ltd
+ #   Copyright (c) 2003-2019 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,22 +28,32 @@
 require 'date'
 
 module GroupDocsAnnotationCloud
-  
+  # Describes page information
   class PageInfo
+
+    # Gets or sets the page number
     attr_accessor :number
+
+    # Gets or sets the page width
     attr_accessor :width
+
+    # Gets or sets the page height
     attr_accessor :height
-    attr_accessor :visible
+
+    # Indicates whether page is visible or not
+    attr_accessor :is_visible
+
+    # Gets or sets the list of text rows
     attr_accessor :rows
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'number' => :'number',
-        :'width' => :'width',
-        :'height' => :'height',
-        :'visible' => :'visible',
-        :'rows' => :'rows'
+        :'number' => :'Number',
+        :'width' => :'Width',
+        :'height' => :'Height',
+        :'is_visible' => :'IsVisible',
+        :'rows' => :'Rows'
       }
     end
 
@@ -53,7 +63,7 @@ module GroupDocsAnnotationCloud
         :'number' => :'Integer',
         :'width' => :'Integer',
         :'height' => :'Integer',
-        :'visible' => :'BOOLEAN',
+        :'is_visible' => :'BOOLEAN',
         :'rows' => :'Array<RowInfo>'
       }
     end
@@ -78,8 +88,8 @@ module GroupDocsAnnotationCloud
         self.height = attributes[:'Height']
       end
 
-      if attributes.key?(:'Visible')
-        self.visible = attributes[:'Visible']
+      if attributes.key?(:'IsVisible')
+        self.is_visible = attributes[:'IsVisible']
       end
 
       if attributes.key?(:'Rows')
@@ -106,8 +116,8 @@ module GroupDocsAnnotationCloud
         invalid_properties.push("invalid value for 'height', height cannot be nil.")
       end
 
-      if @visible.nil?
-        invalid_properties.push("invalid value for 'visible', visible cannot be nil.")
+      if @is_visible.nil?
+        invalid_properties.push("invalid value for 'is_visible', is_visible cannot be nil.")
       end
 
       return invalid_properties
@@ -119,7 +129,7 @@ module GroupDocsAnnotationCloud
       return false if @number.nil?
       return false if @width.nil?
       return false if @height.nil?
-      return false if @visible.nil?
+      return false if @is_visible.nil?
       return true
     end
 
@@ -131,7 +141,7 @@ module GroupDocsAnnotationCloud
           number == other.number &&
           width == other.width &&
           height == other.height &&
-          visible == other.visible &&
+          is_visible == other.is_visible &&
           rows == other.rows
     end
 
@@ -144,7 +154,13 @@ module GroupDocsAnnotationCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [number, width, height, visible, rows].hash
+      [number, width, height, is_visible, rows].hash
+    end
+
+    # Downcases first letter.
+    # @return downcased string
+    def uncap(str)
+      str[0, 1].downcase + str[1..-1]
     end
 
     # Builds the object from hash
@@ -153,14 +169,16 @@ module GroupDocsAnnotationCloud
     def build_from_hash(attributes)
       return nil unless attributes.is_a?(Hash)
       self.class.swagger_types.each_pair do |key, type|
+        pname = uncap(self.class.attribute_map[key]).intern
+        value = attributes[pname]
         if type =~ /\AArray<(.*)>/i
           # check to ensure the input is an array given that the the attribute
-          # is documented as an array but the input is not
-          if attributes[self.class.attribute_map[key]].is_a?(Array)
-            self.send("#{key}=", attributes[self.class.attribute_map[key]].map { |v| _deserialize($1, v) })
+          # is documented as an array but the input is not                    
+          if value.is_a?(Array)
+            self.send("#{key}=", value.map { |v| _deserialize($1, v) })
           end
-        elsif !attributes[self.class.attribute_map[key]].nil?
-          self.send("#{key}=", _deserialize(type, attributes[self.class.attribute_map[key]]))
+        elsif !value.nil?
+          self.send("#{key}=", _deserialize(type, value))
         end
         # or else data not found in attributes(hash), not an issue as the data can be optional
       end
@@ -175,9 +193,9 @@ module GroupDocsAnnotationCloud
     def _deserialize(type, value)
       case type.to_sym
       when :DateTime
-        Time.at(/\d/.match(value)[0].to_f).to_datetime
+        Date.parse value
       when :Date
-        Time.at(/\d/.match(value)[0].to_f).to_date
+        Date.parse value
       when :String
         value.to_s
       when :Integer
