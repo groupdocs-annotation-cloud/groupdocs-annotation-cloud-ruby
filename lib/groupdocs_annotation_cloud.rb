@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="groupdocs_annotation_cloud.rb">
-#   Copyright (c) 2003-2019 Aspose Pty Ltd
+#   Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -48,7 +48,6 @@ require_relative 'groupdocs_annotation_cloud/models/page_images'
 require_relative 'groupdocs_annotation_cloud/models/page_info'
 require_relative 'groupdocs_annotation_cloud/models/point'
 require_relative 'groupdocs_annotation_cloud/models/rectangle'
-require_relative 'groupdocs_annotation_cloud/models/row_info'
 require_relative 'groupdocs_annotation_cloud/models/storage_exist'
 require_relative 'groupdocs_annotation_cloud/models/storage_file'
 require_relative 'groupdocs_annotation_cloud/models/annotation_api_link'

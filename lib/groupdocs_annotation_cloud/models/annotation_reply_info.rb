@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="annotation_reply_info.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,10 +32,10 @@ module GroupDocsAnnotationCloud
   class AnnotationReplyInfo
 
     # Gets or sets the unique identifier
-    attr_accessor :guid
+    attr_accessor :id
 
     # Gets or sets the user's unique identifier
-    attr_accessor :user_guid
+    attr_accessor :user_id
 
     # Gets or sets the user's name
     attr_accessor :user_name
@@ -44,37 +44,37 @@ module GroupDocsAnnotationCloud
     attr_accessor :user_email
 
     # Gets or sets the message
-    attr_accessor :message
+    attr_accessor :comment
 
     # Gets or sets the reply time
     attr_accessor :replied_on
 
     # Gets or sets the parent reply unique identifier
-    attr_accessor :parent_reply_guid
+    attr_accessor :parent_reply_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'guid' => :'Guid',
-        :'user_guid' => :'UserGuid',
+        :'id' => :'Id',
+        :'user_id' => :'UserId',
         :'user_name' => :'UserName',
         :'user_email' => :'UserEmail',
-        :'message' => :'Message',
+        :'comment' => :'Comment',
         :'replied_on' => :'RepliedOn',
-        :'parent_reply_guid' => :'ParentReplyGuid'
+        :'parent_reply_id' => :'ParentReplyId'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'guid' => :'String',
-        :'user_guid' => :'String',
+        :'id' => :'Integer',
+        :'user_id' => :'Integer',
         :'user_name' => :'String',
         :'user_email' => :'String',
-        :'message' => :'String',
+        :'comment' => :'String',
         :'replied_on' => :'DateTime',
-        :'parent_reply_guid' => :'String'
+        :'parent_reply_id' => :'Integer'
       }
     end
 
@@ -86,12 +86,12 @@ module GroupDocsAnnotationCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'Guid')
-        self.guid = attributes[:'Guid']
+      if attributes.key?(:'Id')
+        self.id = attributes[:'Id']
       end
 
-      if attributes.key?(:'UserGuid')
-        self.user_guid = attributes[:'UserGuid']
+      if attributes.key?(:'UserId')
+        self.user_id = attributes[:'UserId']
       end
 
       if attributes.key?(:'UserName')
@@ -102,16 +102,16 @@ module GroupDocsAnnotationCloud
         self.user_email = attributes[:'UserEmail']
       end
 
-      if attributes.key?(:'Message')
-        self.message = attributes[:'Message']
+      if attributes.key?(:'Comment')
+        self.comment = attributes[:'Comment']
       end
 
       if attributes.key?(:'RepliedOn')
         self.replied_on = attributes[:'RepliedOn']
       end
 
-      if attributes.key?(:'ParentReplyGuid')
-        self.parent_reply_guid = attributes[:'ParentReplyGuid']
+      if attributes.key?(:'ParentReplyId')
+        self.parent_reply_id = attributes[:'ParentReplyId']
       end
 
     end
@@ -120,8 +120,20 @@ module GroupDocsAnnotationCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
+      if @id.nil?
+        invalid_properties.push("invalid value for 'id', id cannot be nil.")
+      end
+
+      if @user_id.nil?
+        invalid_properties.push("invalid value for 'user_id', user_id cannot be nil.")
+      end
+
       if @replied_on.nil?
         invalid_properties.push("invalid value for 'replied_on', replied_on cannot be nil.")
+      end
+
+      if @parent_reply_id.nil?
+        invalid_properties.push("invalid value for 'parent_reply_id', parent_reply_id cannot be nil.")
       end
 
       return invalid_properties
@@ -130,7 +142,10 @@ module GroupDocsAnnotationCloud
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @id.nil?
+      return false if @user_id.nil?
       return false if @replied_on.nil?
+      return false if @parent_reply_id.nil?
       return true
     end
 
@@ -139,13 +154,13 @@ module GroupDocsAnnotationCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          guid == other.guid &&
-          user_guid == other.user_guid &&
+          id == other.id &&
+          user_id == other.user_id &&
           user_name == other.user_name &&
           user_email == other.user_email &&
-          message == other.message &&
+          comment == other.comment &&
           replied_on == other.replied_on &&
-          parent_reply_guid == other.parent_reply_guid
+          parent_reply_id == other.parent_reply_id
     end
 
     # @see the `==` method
@@ -157,7 +172,7 @@ module GroupDocsAnnotationCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [guid, user_guid, user_name, user_email, message, replied_on, parent_reply_guid].hash
+      [id, user_id, user_name, user_email, comment, replied_on, parent_reply_id].hash
     end
 
     # Downcases first letter.

@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="annotate.rb">
-#   Copyright (c) 2003-2019 Aspose Pty Ltd
+#   Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -250,60 +250,6 @@ module GroupDocsAnnotationCloud
       [data, status_code, headers]
     end
 
-    # Retrieves PDF version of document
-    # 
-    # @param request get_pdf_request
-    # @return [File]
-    def get_pdf(request)
-      data, _status_code, _headers = get_pdf_with_http_info(request)
-      data
-    end
-
-    # Retrieves PDF version of document
-    # 
-    # @param request get_pdf_request
-    # @return [Array<(File, Fixnum, Hash)>]
-    # File data, response status code and response headers
-    def get_pdf_with_http_info(request)
-      raise ArgumentError, 'Incorrect request type' unless request.is_a? GetPdfRequest
-
-      @api_client.config.logger.debug 'Calling API: AnnotateApi.get_pdf ...' if @api_client.config.debugging
-      # verify the required parameter 'file_path' is set
-      raise ArgumentError, 'Missing the required parameter file_path when calling AnnotateApi.get_pdf' if @api_client.config.client_side_validation && request.file_path.nil?
-      # resource path
-      local_var_path = '/annotation/pdf'
-
-      # query parameters
-      query_params = {}
-      query_params[downcase_first_letter('filePath')] = request.file_path
-
-
-      # header parameters
-      header_params = {}
-      # HTTP header 'Accept' (if needed)
-      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
-      # HTTP header 'Content-Type'
-      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
-
-      # form parameters
-      form_params = {}
-
-      # http body (model)
-      post_body = nil
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
-                                                        header_params: header_params,
-                                                        query_params: query_params,
-                                                        form_params: form_params,
-                                                        body: post_body,
-                                                        access_token: get_access_token,
-                                                        return_type: 'File')
-      if @api_client.config.debugging
-        @api_client.config.logger.debug "API called:
-        AnnotateApi#get_pdf\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
-      end
-      [data, status_code, headers]
-    end
-
     # Adds annotations to document
     # 
     # @param request post_annotations_request
@@ -416,7 +362,7 @@ end
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="delete_annotations_request.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -461,7 +407,7 @@ end
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="get_export_request.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -526,7 +472,7 @@ end
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="get_import_request.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -570,53 +516,8 @@ module GroupDocsAnnotationCloud
 end
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="get_pdf_request.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
- # </copyright>
- # <summary>
- #  Permission is hereby granted, free of charge, to any person obtaining a copy
- #  of this software and associated documentation files (the "Software"), to deal
- #  in the Software without restriction, including without limitation the rights
- #  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- #  copies of the Software, and to permit persons to whom the Software is
- #  furnished to do so, subject to the following conditions:
- # 
- #  The above copyright notice and this permission notice shall be included in all
- #  copies or substantial portions of the Software.
- # 
- #  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- #  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- #  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- #  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- #  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- #  SOFTWARE.
- # </summary>
- # --------------------------------------------------------------------------------------------------------------------
- #
-
-module GroupDocsAnnotationCloud
-
-  #
-  # Request model for get_pdf operation.
-  #
-  class GetPdfRequest
-
-        # Path to document in storage
-        attr_accessor :file_path
-	
-        #
-        # Initializes a new instance.
-        # @param file_path Path to document in storage
-        def initialize(file_path)
-           self.file_path = file_path
-        end
-  end
-end
- #
- # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="post_annotations_request.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy

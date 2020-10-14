@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="test_file.rb">
-#    Copyright (c) 2003-2019 Aspose Pty Ltd
+#    Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -210,19 +210,17 @@ module GroupDocsAnnotationCloud
 
         def self.test_files_list
             [
+                self.OnePageCells,
                 self.OnePageDiagram,
-                self.TenPagesDiagram,
                 self.OnePageEmail,
+                self.OnePageHtml,
                 self.OnePageBmp,
                 self.OnePagePng,
                 self.OnePagePdf,
                 self.OnePagePasswordPdf,
-                self.OnePageSlides,
-                self.OnePagePasswordSlides,
-                self.TenPagesSlides,
                 self.OnePageWords,
+                self.OnePageSlides,
                 self.OnePagePasswordWords,
-                self.TenPagesWords
             ]        
         end        
 
@@ -247,10 +245,9 @@ module GroupDocsAnnotationCloud
         
         def self.test_files_list_many_pages
             [
+                self.TenPagesCells,
                 self.TenPagesDiagram,
-                #self.TenPagesPdf,
-                self.TenPagesSlides
-                #self.TenPagesWords
+                self.TenPagesWords
             ]        
         end         
     end

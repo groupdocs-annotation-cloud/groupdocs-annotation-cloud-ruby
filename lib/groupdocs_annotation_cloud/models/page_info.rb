@@ -1,7 +1,7 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="page_info.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -40,20 +40,12 @@ module GroupDocsAnnotationCloud
     # Gets or sets the page height
     attr_accessor :height
 
-    # Indicates whether page is visible or not
-    attr_accessor :is_visible
-
-    # Gets or sets the list of text rows
-    attr_accessor :rows
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'number' => :'Number',
         :'width' => :'Width',
-        :'height' => :'Height',
-        :'is_visible' => :'IsVisible',
-        :'rows' => :'Rows'
+        :'height' => :'Height'
       }
     end
 
@@ -62,9 +54,7 @@ module GroupDocsAnnotationCloud
       {
         :'number' => :'Integer',
         :'width' => :'Integer',
-        :'height' => :'Integer',
-        :'is_visible' => :'BOOLEAN',
-        :'rows' => :'Array<RowInfo>'
+        :'height' => :'Integer'
       }
     end
 
@@ -88,16 +78,6 @@ module GroupDocsAnnotationCloud
         self.height = attributes[:'Height']
       end
 
-      if attributes.key?(:'IsVisible')
-        self.is_visible = attributes[:'IsVisible']
-      end
-
-      if attributes.key?(:'Rows')
-        if (value = attributes[:'Rows']).is_a?(Array)
-          self.rows = value
-        end
-      end
-
     end
 
     # Show invalid properties with the reasons. Usually used together with valid?
@@ -116,10 +96,6 @@ module GroupDocsAnnotationCloud
         invalid_properties.push("invalid value for 'height', height cannot be nil.")
       end
 
-      if @is_visible.nil?
-        invalid_properties.push("invalid value for 'is_visible', is_visible cannot be nil.")
-      end
-
       return invalid_properties
     end
 
@@ -129,7 +105,6 @@ module GroupDocsAnnotationCloud
       return false if @number.nil?
       return false if @width.nil?
       return false if @height.nil?
-      return false if @is_visible.nil?
       return true
     end
 
@@ -140,9 +115,7 @@ module GroupDocsAnnotationCloud
       self.class == other.class &&
           number == other.number &&
           width == other.width &&
-          height == other.height &&
-          is_visible == other.is_visible &&
-          rows == other.rows
+          height == other.height
     end
 
     # @see the `==` method
@@ -154,7 +127,7 @@ module GroupDocsAnnotationCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [number, width, height, is_visible, rows].hash
+      [number, width, height].hash
     end
 
     # Downcases first letter.

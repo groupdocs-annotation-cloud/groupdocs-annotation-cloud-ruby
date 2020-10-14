@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2019 Aspose Pty Ltd
+#    Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -31,15 +31,7 @@ module GroupDocsAnnotationCloud
   require_relative './../test_context'
   require_relative './../test_file'   
 
-  class TestAnnoteApiManyPages < TestContext
-    
-    def test_get_pdf
-      TestFile.test_files_list_many_pages.each do |test_file|
-        request = GetPdfRequest.new(test_file.path)
-        response = @annotate_api.get_pdf(request)  
-        assert_operator response.length, :>, 0          
-      end
-    end 
+  class TestAnnoteApiManyPages < TestContext    
     
     def test_annotations
       TestFile.test_files_list_many_pages.each do |test_file|
@@ -78,7 +70,7 @@ module GroupDocsAnnotationCloud
       a1.box.height = 37.7290153503418
       a1.page_number = 0
       a1.pen_color = 1201033
-      a1.pen_style = 0
+      a1.pen_style = "Solid"
       a1.pen_width = 1
       a1.type = "Distance"
       a1.creator_name = "Anonym A."
@@ -94,7 +86,7 @@ module GroupDocsAnnotationCloud
       a2.box.height = 37.7290153503418
       a2.page_number = 2
       a2.pen_color = 1201033
-      a2.pen_style = 0
+      a2.pen_style = "Solid"
       a2.pen_width = 1
       a2.type = "Area"
       a2.creator_name = "Anonym A."
@@ -123,7 +115,7 @@ module GroupDocsAnnotationCloud
       a4.box.height = 37.7290153503418
       a4.page_number = 5
       a4.pen_color = 1201033
-      a4.pen_style = 0
+      a4.pen_style = "Solid"
       a4.pen_width = 1
       a4.type = "Arrow"
       a4.creator_name = "Anonym A."      

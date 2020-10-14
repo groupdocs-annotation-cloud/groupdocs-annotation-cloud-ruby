@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="preview.rb">
-#   Copyright (c) 2003-2019 Aspose Pty Ltd
+#   Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -144,35 +144,35 @@ module GroupDocsAnnotationCloud
       query_params = {}
       query_params[downcase_first_letter('filePath')] = request.file_path
 
-      if local_var_path.include? ('{' + downcase_first_letter('countPagesToConvert') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('countPagesToConvert') + '}', request.count_pages_to_convert.to_s)
-      else
-        query_params[downcase_first_letter('countPagesToConvert')] = request.count_pages_to_convert unless request.count_pages_to_convert.nil?
-      end
-      if local_var_path.include? ('{' + downcase_first_letter('pageNumber') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('pageNumber') + '}', request.page_number.to_s)
-      else
-        query_params[downcase_first_letter('pageNumber')] = request.page_number unless request.page_number.nil?
-      end
       if local_var_path.include? ('{' + downcase_first_letter('pageNumbersToConvert') + '}')
         local_var_path = local_var_path.sub('{' + downcase_first_letter('pageNumbersToConvert') + '}', request.page_numbers_to_convert.to_s)
       else
         query_params[downcase_first_letter('pageNumbersToConvert')] = @api_client.build_collection_param(request.page_numbers_to_convert, :multi) unless request.page_numbers_to_convert.nil?
+      end
+      if local_var_path.include? ('{' + downcase_first_letter('format') + '}')
+        local_var_path = local_var_path.sub('{' + downcase_first_letter('format') + '}', request.format.to_s)
+      else
+        query_params[downcase_first_letter('format')] = request.format unless request.format.nil?
+      end
+      if local_var_path.include? ('{' + downcase_first_letter('width') + '}')
+        local_var_path = local_var_path.sub('{' + downcase_first_letter('width') + '}', request.width.to_s)
+      else
+        query_params[downcase_first_letter('width')] = request.width unless request.width.nil?
+      end
+      if local_var_path.include? ('{' + downcase_first_letter('height') + '}')
+        local_var_path = local_var_path.sub('{' + downcase_first_letter('height') + '}', request.height.to_s)
+      else
+        query_params[downcase_first_letter('height')] = request.height unless request.height.nil?
       end
       if local_var_path.include? ('{' + downcase_first_letter('withoutAnnotations') + '}')
         local_var_path = local_var_path.sub('{' + downcase_first_letter('withoutAnnotations') + '}', request.without_annotations.to_s)
       else
         query_params[downcase_first_letter('withoutAnnotations')] = request.without_annotations unless request.without_annotations.nil?
       end
-      if local_var_path.include? ('{' + downcase_first_letter('enableCaching') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('enableCaching') + '}', request.enable_caching.to_s)
+      if local_var_path.include? ('{' + downcase_first_letter('renderComments') + '}')
+        local_var_path = local_var_path.sub('{' + downcase_first_letter('renderComments') + '}', request.render_comments.to_s)
       else
-        query_params[downcase_first_letter('enableCaching')] = request.enable_caching unless request.enable_caching.nil?
-      end
-      if local_var_path.include? ('{' + downcase_first_letter('cacheStoragePath') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('cacheStoragePath') + '}', request.cache_storage_path.to_s)
-      else
-        query_params[downcase_first_letter('cacheStoragePath')] = request.cache_storage_path unless request.cache_storage_path.nil?
+        query_params[downcase_first_letter('renderComments')] = request.render_comments unless request.render_comments.nil?
       end
       if local_var_path.include? ('{' + downcase_first_letter('password') + '}')
         local_var_path = local_var_path.sub('{' + downcase_first_letter('password') + '}', request.password.to_s)
@@ -263,7 +263,7 @@ end
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="delete_pages_request.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -308,7 +308,7 @@ end
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="get_pages_request.rb">
- #   Copyright (c) 2003-2019 Aspose Pty Ltd
+ #   Copyright (c) 2003-2020 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -341,39 +341,39 @@ module GroupDocsAnnotationCloud
 
         # Document path in storage
         attr_accessor :file_path
-        # The count pages to convert
-        attr_accessor :count_pages_to_convert
-        # The start page number
-        attr_accessor :page_number
         # The list of page numbers to convert
         attr_accessor :page_numbers_to_convert
+        # Preview format: \"PNG\" (default), \"JPEG\", or \"BMP\"
+        attr_accessor :format
+        # Preview image width
+        attr_accessor :width
+        # Preview image height
+        attr_accessor :height
         # If true returns specific pages without annotations
         attr_accessor :without_annotations
-        # Indicates whether to use previously cached document or not
-        attr_accessor :enable_caching
-        # The cache storage path
-        attr_accessor :cache_storage_path
+        # Render comments (false by default)
+        attr_accessor :render_comments
         # Source document opening password
         attr_accessor :password
 	
         #
         # Initializes a new instance.
         # @param file_path Document path in storage
-        # @param count_pages_to_convert The count pages to convert
-        # @param page_number The start page number
         # @param page_numbers_to_convert The list of page numbers to convert
+        # @param format Preview format: \"PNG\" (default), \"JPEG\", or \"BMP\"
+        # @param width Preview image width
+        # @param height Preview image height
         # @param without_annotations If true returns specific pages without annotations
-        # @param enable_caching Indicates whether to use previously cached document or not
-        # @param cache_storage_path The cache storage path
+        # @param render_comments Render comments (false by default)
         # @param password Source document opening password
-        def initialize(file_path, count_pages_to_convert = nil, page_number = nil, page_numbers_to_convert = nil, without_annotations = nil, enable_caching = nil, cache_storage_path = nil, password = nil)
+        def initialize(file_path, page_numbers_to_convert = nil, format = nil, width = nil, height = nil, without_annotations = nil, render_comments = nil, password = nil)
            self.file_path = file_path
-           self.count_pages_to_convert = count_pages_to_convert
-           self.page_number = page_number
            self.page_numbers_to_convert = page_numbers_to_convert
+           self.format = format
+           self.width = width
+           self.height = height
            self.without_annotations = without_annotations
-           self.enable_caching = enable_caching
-           self.cache_storage_path = cache_storage_path
+           self.render_comments = render_comments
            self.password = password
         end
   end

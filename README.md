@@ -1,4 +1,5 @@
 # GroupDocs.Annotation Cloud Ruby SDK
+
 Ruby gem for communicating with the GroupDocs.Annotation Cloud API
 
 ## Installation
@@ -12,12 +13,13 @@ gem install groupdocs_annotation_cloud
 To add dependency to your app copy following into your Gemfile and run `bundle install`:
 
 ```
-gem "groupdocs_annotation_cloud", "~> 19.5"
+gem "groupdocs_annotation_cloud", "~> 20.10"
 ```
 
 ## Getting Started
 
 Please follow the [installation](#installation) procedure and then run the following code:
+
 ```ruby
 # Load the gem
 require 'groupdocs_annotation_cloud'
@@ -40,6 +42,17 @@ end
 ```
 
 ## Licensing
+
 GroupDocs.Annotation Cloud Ruby SDK licensed under [MIT License](LICENSE).
 
-[Home](https://www.groupdocs.cloud/) | [Product Page](https://products.groupdocs.cloud/annotation/ruby) | [Docs](https://docs.groupdocs.cloud/annotation/) | [Demos](https://products.groupdocs.app/annotation/family) | [API Reference](https://apireference.groupdocs.cloud/annotation/) | [Examples](https://github.com/groupdocs-annotation-cloud/groupdocs-annotation-cloud-ruby-samples) | [Blog](https://blog.groupdocs.cloud/category/annotation/) | [Free Support](https://forum.groupdocs.cloud/c/annotation) | [Free Trial](https://purchase.groupdocs.cloud/trial)
+## Resources
+
++[**Website**](https://www.groupdocs.cloud)
++[**Product Home**](https://products.groupdocs.cloud/annotation)
++[**Documentation**](https://docs.groupdocs.cloud/annotation)
++[**Free Support Forum**](https://forum.groupdocs.cloud/c/annotation)
++[**Blog**](https://blog.groupdocs.cloud/category/annotation)
+
+## Contact Us
+
+Your feedback is very important to us. Please feel free to contact us using our [Support Forums](https://forum.groupdocs.cloud/c/annotation).

@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2019 Aspose Pty Ltd
+#    Copyright (c) 2003-2020 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -32,14 +32,6 @@ module GroupDocsAnnotationCloud
   require_relative './../test_file'   
 
   class TestAnnoteApi < TestContext
-    
-    def test_get_pdf
-      TestFile.test_files_list_no_password.each do |test_file|
-        request = GetPdfRequest.new(test_file.path)
-        response = @annotate_api.get_pdf(request)  
-        assert_operator response.length, :>, 0          
-      end
-    end 
     
     def test_annotations
       TestFile.test_files_list.each do |test_file|
@@ -78,7 +70,7 @@ module GroupDocsAnnotationCloud
       a.box.height = 37.7290153503418
       a.page_number = 0
       a.pen_color = 1201033
-      a.pen_style = 0
+      a.pen_style = "Solid"
       a.pen_width = 1
       a.type = "Area"
       a.creator_name = "Anonym A."
