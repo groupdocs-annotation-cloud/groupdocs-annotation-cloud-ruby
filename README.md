@@ -2,7 +2,7 @@
 
 # Annotate Documents via Ruby with REST API
 
-[GroupDocs.Annotation Cloud SDK for Ruby](https://products.groupdocs.cloud/annotation/ruby) wraps GroupDocs.Annotation RESTful APIs so you may integrate Document Annotation features in your own Java apps with zero initial cost.
+[GroupDocs.Annotation Cloud SDK for Ruby](https://products.groupdocs.cloud/annotation/ruby) wraps GroupDocs.Annotation RESTful APIs so you may integrate Document Annotation features in your own apps with zero initial cost.
 
 The solution helps in applying annotations, sticky notes, watermark overlays, redactions, text replacements and markups to documents, presentations, emails, spreadsheets, PDF, images other file formats.
 
@@ -36,7 +36,7 @@ Check out the [Developer's Guide](https://docs.groupdocs.cloud/annotation/develo
 
 First create an account at [GroupDocs for Cloud](https://dashboard.groupdocs.cloud/) and get your application information. Next, follow the installation steps to get started.
 
-## Installation
+### Installation
 
 A GEM of GroupDocs.Annotation is available at [rubygems.org](https://rubygems.org/gems/groupdocs_annotation_cloud). You can install it with the help of the following command.
 
