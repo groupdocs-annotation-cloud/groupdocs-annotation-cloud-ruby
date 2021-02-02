@@ -56,12 +56,13 @@ gem "groupdocs_annotation_cloud", "~> 20.10"
 # Load the gem
 require 'groupdocs_annotation_cloud'
 
-# Get your app_sid and app_key at https://dashboard.groupdocs.cloud (free registration is required).
-app_sid = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
-app_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+# Get Client Id and Client Secret from https://dashboard.groupdocs.cloud
+$my_client_id = ""
+$my_client_secret = ""
 
-# Create instance of the API class
-api = GroupDocsAnnotationCloud::InfoApi.from_keys(app_sid, app_key)
+# Create instance of the API
+$configuration = GroupDocsAnnotationCloud::Configuration.new($my_client_id, $my_client_secret)
+api = GroupDocsAnnotationCloud::InfoApi.from_config($configuration)
 
 # Retrieve supported file-formats
 response = api.get_supported_file_formats
