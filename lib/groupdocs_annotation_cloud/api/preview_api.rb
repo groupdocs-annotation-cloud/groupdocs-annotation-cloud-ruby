@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="preview.rb">
-#   Copyright (c) 2003-2020 Aspose Pty Ltd
+#   Copyright (c) 2003-2021 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -82,15 +82,13 @@ module GroupDocsAnnotationCloud
       raise ArgumentError, 'Incorrect request type' unless request.is_a? DeletePagesRequest
 
       @api_client.config.logger.debug 'Calling API: PreviewApi.delete_pages ...' if @api_client.config.debugging
-      # verify the required parameter 'file_path' is set
-      raise ArgumentError, 'Missing the required parameter file_path when calling PreviewApi.delete_pages' if @api_client.config.client_side_validation && request.file_path.nil?
+      # verify the required parameter 'file_info' is set
+      raise ArgumentError, 'Missing the required parameter file_info when calling PreviewApi.delete_pages' if @api_client.config.client_side_validation && request.file_info.nil?
       # resource path
-      local_var_path = '/annotation/pages'
+      local_var_path = '/annotation/preview/remove'
 
       # query parameters
       query_params = {}
-      query_params[downcase_first_letter('filePath')] = request.file_path
-
 
       # header parameters
       header_params = {}
@@ -103,8 +101,8 @@ module GroupDocsAnnotationCloud
       form_params = {}
 
       # http body (model)
-      post_body = nil
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path,
+      post_body = @api_client.object_to_http_body(request.file_info)
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
                                                         header_params: header_params,
                                                         query_params: query_params,
                                                         form_params: form_params,
@@ -135,50 +133,13 @@ module GroupDocsAnnotationCloud
       raise ArgumentError, 'Incorrect request type' unless request.is_a? GetPagesRequest
 
       @api_client.config.logger.debug 'Calling API: PreviewApi.get_pages ...' if @api_client.config.debugging
-      # verify the required parameter 'file_path' is set
-      raise ArgumentError, 'Missing the required parameter file_path when calling PreviewApi.get_pages' if @api_client.config.client_side_validation && request.file_path.nil?
+      # verify the required parameter 'options' is set
+      raise ArgumentError, 'Missing the required parameter options when calling PreviewApi.get_pages' if @api_client.config.client_side_validation && request.options.nil?
       # resource path
-      local_var_path = '/annotation/pages'
+      local_var_path = '/annotation/preview/create'
 
       # query parameters
       query_params = {}
-      query_params[downcase_first_letter('filePath')] = request.file_path
-
-      if local_var_path.include? ('{' + downcase_first_letter('pageNumbersToConvert') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('pageNumbersToConvert') + '}', request.page_numbers_to_convert.to_s)
-      else
-        query_params[downcase_first_letter('pageNumbersToConvert')] = @api_client.build_collection_param(request.page_numbers_to_convert, :multi) unless request.page_numbers_to_convert.nil?
-      end
-      if local_var_path.include? ('{' + downcase_first_letter('format') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('format') + '}', request.format.to_s)
-      else
-        query_params[downcase_first_letter('format')] = request.format unless request.format.nil?
-      end
-      if local_var_path.include? ('{' + downcase_first_letter('width') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('width') + '}', request.width.to_s)
-      else
-        query_params[downcase_first_letter('width')] = request.width unless request.width.nil?
-      end
-      if local_var_path.include? ('{' + downcase_first_letter('height') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('height') + '}', request.height.to_s)
-      else
-        query_params[downcase_first_letter('height')] = request.height unless request.height.nil?
-      end
-      if local_var_path.include? ('{' + downcase_first_letter('withoutAnnotations') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('withoutAnnotations') + '}', request.without_annotations.to_s)
-      else
-        query_params[downcase_first_letter('withoutAnnotations')] = request.without_annotations unless request.without_annotations.nil?
-      end
-      if local_var_path.include? ('{' + downcase_first_letter('renderComments') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('renderComments') + '}', request.render_comments.to_s)
-      else
-        query_params[downcase_first_letter('renderComments')] = request.render_comments unless request.render_comments.nil?
-      end
-      if local_var_path.include? ('{' + downcase_first_letter('password') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('password') + '}', request.password.to_s)
-      else
-        query_params[downcase_first_letter('password')] = request.password unless request.password.nil?
-      end
 
       # header parameters
       header_params = {}
@@ -191,8 +152,8 @@ module GroupDocsAnnotationCloud
       form_params = {}
 
       # http body (model)
-      post_body = nil
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+      post_body = @api_client.object_to_http_body(request.options)
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
                                                         header_params: header_params,
                                                         query_params: query_params,
                                                         form_params: form_params,
@@ -263,7 +224,7 @@ end
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="delete_pages_request.rb">
- #   Copyright (c) 2003-2020 Aspose Pty Ltd
+ #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -294,21 +255,21 @@ module GroupDocsAnnotationCloud
   #
   class DeletePagesRequest
 
-        # Document path in storage
-        attr_accessor :file_path
+        # Document info to remove preview
+        attr_accessor :file_info
 	
         #
         # Initializes a new instance.
-        # @param file_path Document path in storage
-        def initialize(file_path)
-           self.file_path = file_path
+        # @param file_info Document info to remove preview
+        def initialize(file_info)
+           self.file_info = file_info
         end
   end
 end
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="get_pages_request.rb">
- #   Copyright (c) 2003-2020 Aspose Pty Ltd
+ #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -339,42 +300,14 @@ module GroupDocsAnnotationCloud
   #
   class GetPagesRequest
 
-        # Document path in storage
-        attr_accessor :file_path
-        # The list of page numbers to convert
-        attr_accessor :page_numbers_to_convert
-        # Preview format: \"PNG\" (default), \"JPEG\", or \"BMP\"
-        attr_accessor :format
-        # Preview image width
-        attr_accessor :width
-        # Preview image height
-        attr_accessor :height
-        # If true returns specific pages without annotations
-        attr_accessor :without_annotations
-        # Render comments (false by default)
-        attr_accessor :render_comments
-        # Source document opening password
-        attr_accessor :password
+        # Document preview options
+        attr_accessor :options
 	
         #
         # Initializes a new instance.
-        # @param file_path Document path in storage
-        # @param page_numbers_to_convert The list of page numbers to convert
-        # @param format Preview format: \"PNG\" (default), \"JPEG\", or \"BMP\"
-        # @param width Preview image width
-        # @param height Preview image height
-        # @param without_annotations If true returns specific pages without annotations
-        # @param render_comments Render comments (false by default)
-        # @param password Source document opening password
-        def initialize(file_path, page_numbers_to_convert = nil, format = nil, width = nil, height = nil, without_annotations = nil, render_comments = nil, password = nil)
-           self.file_path = file_path
-           self.page_numbers_to_convert = page_numbers_to_convert
-           self.format = format
-           self.width = width
-           self.height = height
-           self.without_annotations = without_annotations
-           self.render_comments = render_comments
-           self.password = password
+        # @param options Document preview options
+        def initialize(options)
+           self.options = options
         end
   end
 end

@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2020 Aspose Pty Ltd
+#    Copyright (c) 2003-2021 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -33,30 +33,77 @@ module GroupDocsAnnotationCloud
 
   class TestAnnoteApi < TestContext
     
-    def test_annotations
-      TestFile.test_files_list.each do |test_file|
+    def test_annotate
+      TestFile.test_files_annotate.each do |test_file|
 
         @annotate_api.config.logger.debug "Annotate: " + test_file.path
         
-        # Post annotation
-        request = PostAnnotationsRequest.new(test_file.path, get_annotations())
-        response = @annotate_api.post_annotations(request)         
+        file_info = FileInfo.new()
+        file_info.file_path = test_file.path
+        file_info.password = test_file.password
+        options = AnnotateOptions.new()
+        options.file_info = file_info
+        options.annotations = get_annotations()
+        options.output_path = @@output_dir + '/' + test_file.file_name
 
-        # Import annotations
-        request = GetImportRequest.new(test_file.path)
-        response = @annotate_api.get_import(request)  
-        assert_operator response.size, :>, 0 
-
-        # Export annotations
-        request = GetExportRequest.new(test_file.path, nil, nil, nil, nil, test_file.password)
-        response = @annotate_api.get_export(request)  
-        assert_operator response.length, :>, 0  
-        
-        # Delete annotations
-        request = DeleteAnnotationsRequest.new(test_file.path)
-        @annotate_api.delete_annotations(request)
+        request = AnnotateRequest.new(options)
+        result = @annotate_api.annotate(request)   
+        assert_operator result.href.length, :>, 0
       end
     end 
+
+    def test_annotate_direct
+      TestFile.test_files_annotate.each do |test_file|
+
+        @annotate_api.config.logger.debug "Annotate direct: " + test_file.path
+        
+        file_info = FileInfo.new()
+        file_info.file_path = test_file.path
+        file_info.password = test_file.password
+        options = AnnotateOptions.new()
+        options.file_info = file_info
+        options.annotations = get_annotations()
+        options.output_path = @@output_dir + '/' + test_file.file_name
+
+        request = AnnotateDirectRequest.new(options)
+        result = @annotate_api.annotate_direct(request)   
+        assert_operator result.length, :>, 0
+      end
+    end    
+
+    def test_extract
+      TestFile.test_files_with_annotations.each do |test_file|
+
+        @annotate_api.config.logger.debug "Extract annotations: " + test_file.path
+        
+        file_info = FileInfo.new()
+        file_info.file_path = test_file.path
+        file_info.password = test_file.password
+
+        request = ExtractRequest.new(file_info)
+        result = @annotate_api.extract(request)   
+        assert_operator result.length, :>, 0
+      end
+    end  
+
+    def test_remove
+      TestFile.test_files_with_annotations.each do |test_file|
+
+        @annotate_api.config.logger.debug "Remove annotations: " + test_file.path
+        
+        file_info = FileInfo.new()
+        file_info.file_path = test_file.path
+        file_info.password = test_file.password
+        options = RemoveOptions.new()
+        options.file_info = file_info
+        options.annotation_ids = [1, 2, 3]
+        options.output_path = @@output_dir + '/' + test_file.file_name
+
+        request = RemoveAnnotationsRequest.new(options)
+        result = @annotate_api.remove_annotations(request)   
+        assert_operator result.href.length, :>, 0
+      end
+    end   
 
     def get_annotations
       a = AnnotationInfo.new

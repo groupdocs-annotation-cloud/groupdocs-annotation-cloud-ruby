@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="annotate.rb">
-#   Copyright (c) 2003-2020 Aspose Pty Ltd
+#   Copyright (c) 2003-2021 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -64,33 +64,31 @@ module GroupDocsAnnotationCloud
       return new(config)
     end
 
-    # Removes annotations from document
+    # Adds annotations to document and saves output file into cloud storage
     # 
-    # @param request delete_annotations_request
-    # @return [nil]
-    def delete_annotations(request)
-      delete_annotations_with_http_info(request)
-      nil
+    # @param request annotate_request
+    # @return [AnnotationApiLink]
+    def annotate(request)
+      data, _status_code, _headers = annotate_with_http_info(request)
+      data
     end
 
-    # Removes annotations from document
+    # Adds annotations to document and saves output file into cloud storage
     # 
-    # @param request delete_annotations_request
-    # @return [Array<(nil, Fixnum, Hash)>]
-    # nil, response status code and response headers
-    def delete_annotations_with_http_info(request)
-      raise ArgumentError, 'Incorrect request type' unless request.is_a? DeleteAnnotationsRequest
+    # @param request annotate_request
+    # @return [Array<(AnnotationApiLink, Fixnum, Hash)>]
+    # AnnotationApiLink data, response status code and response headers
+    def annotate_with_http_info(request)
+      raise ArgumentError, 'Incorrect request type' unless request.is_a? AnnotateRequest
 
-      @api_client.config.logger.debug 'Calling API: AnnotateApi.delete_annotations ...' if @api_client.config.debugging
-      # verify the required parameter 'file_path' is set
-      raise ArgumentError, 'Missing the required parameter file_path when calling AnnotateApi.delete_annotations' if @api_client.config.client_side_validation && request.file_path.nil?
+      @api_client.config.logger.debug 'Calling API: AnnotateApi.annotate ...' if @api_client.config.debugging
+      # verify the required parameter 'options' is set
+      raise ArgumentError, 'Missing the required parameter options when calling AnnotateApi.annotate' if @api_client.config.client_side_validation && request.options.nil?
       # resource path
-      local_var_path = '/annotation'
+      local_var_path = '/annotation/add'
 
       # query parameters
       query_params = {}
-      query_params[downcase_first_letter('filePath')] = request.file_path
-
 
       # header parameters
       header_params = {}
@@ -103,72 +101,46 @@ module GroupDocsAnnotationCloud
       form_params = {}
 
       # http body (model)
-      post_body = nil
-      data, status_code, headers = @api_client.call_api(:DELETE, local_var_path,
+      post_body = @api_client.object_to_http_body(request.options)
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
                                                         header_params: header_params,
                                                         query_params: query_params,
                                                         form_params: form_params,
                                                         body: post_body,
-                                                        access_token: get_access_token)
+                                                        access_token: get_access_token,
+                                                        return_type: 'AnnotationApiLink')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called:
-        AnnotateApi#delete_annotations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        AnnotateApi#annotate\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       [data, status_code, headers]
     end
 
-    # Retrieves document with annotations
+    # Adds annotations to document and returns output file
     # 
-    # @param request get_export_request
+    # @param request annotate_direct_request
     # @return [File]
-    def get_export(request)
-      data, _status_code, _headers = get_export_with_http_info(request)
+    def annotate_direct(request)
+      data, _status_code, _headers = annotate_direct_with_http_info(request)
       data
     end
 
-    # Retrieves document with annotations
+    # Adds annotations to document and returns output file
     # 
-    # @param request get_export_request
+    # @param request annotate_direct_request
     # @return [Array<(File, Fixnum, Hash)>]
     # File data, response status code and response headers
-    def get_export_with_http_info(request)
-      raise ArgumentError, 'Incorrect request type' unless request.is_a? GetExportRequest
+    def annotate_direct_with_http_info(request)
+      raise ArgumentError, 'Incorrect request type' unless request.is_a? AnnotateDirectRequest
 
-      @api_client.config.logger.debug 'Calling API: AnnotateApi.get_export ...' if @api_client.config.debugging
-      # verify the required parameter 'file_path' is set
-      raise ArgumentError, 'Missing the required parameter file_path when calling AnnotateApi.get_export' if @api_client.config.client_side_validation && request.file_path.nil?
+      @api_client.config.logger.debug 'Calling API: AnnotateApi.annotate_direct ...' if @api_client.config.debugging
+      # verify the required parameter 'options' is set
+      raise ArgumentError, 'Missing the required parameter options when calling AnnotateApi.annotate_direct' if @api_client.config.client_side_validation && request.options.nil?
       # resource path
-      local_var_path = '/annotation/result'
+      local_var_path = '/annotation/add'
 
       # query parameters
       query_params = {}
-      query_params[downcase_first_letter('filePath')] = request.file_path
-
-      if local_var_path.include? ('{' + downcase_first_letter('annotationTypes') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('annotationTypes') + '}', request.annotation_types.to_s)
-      else
-        query_params[downcase_first_letter('annotationTypes')] = request.annotation_types unless request.annotation_types.nil?
-      end
-      if local_var_path.include? ('{' + downcase_first_letter('annotatedPages') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('annotatedPages') + '}', request.annotated_pages.to_s)
-      else
-        query_params[downcase_first_letter('annotatedPages')] = request.annotated_pages unless request.annotated_pages.nil?
-      end
-      if local_var_path.include? ('{' + downcase_first_letter('firstPage') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('firstPage') + '}', request.first_page.to_s)
-      else
-        query_params[downcase_first_letter('firstPage')] = request.first_page unless request.first_page.nil?
-      end
-      if local_var_path.include? ('{' + downcase_first_letter('lastPage') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('lastPage') + '}', request.last_page.to_s)
-      else
-        query_params[downcase_first_letter('lastPage')] = request.last_page unless request.last_page.nil?
-      end
-      if local_var_path.include? ('{' + downcase_first_letter('password') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('password') + '}', request.password.to_s)
-      else
-        query_params[downcase_first_letter('password')] = request.password unless request.password.nil?
-      end
 
       # header parameters
       header_params = {}
@@ -181,8 +153,8 @@ module GroupDocsAnnotationCloud
       form_params = {}
 
       # http body (model)
-      post_body = nil
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+      post_body = @api_client.object_to_http_body(request.options)
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path,
                                                         header_params: header_params,
                                                         query_params: query_params,
                                                         form_params: form_params,
@@ -191,38 +163,36 @@ module GroupDocsAnnotationCloud
                                                         return_type: 'File')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called:
-        AnnotateApi#get_export\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        AnnotateApi#annotate_direct\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       [data, status_code, headers]
     end
 
     # Extracts annotations from document
     # 
-    # @param request get_import_request
+    # @param request extract_request
     # @return [Array<AnnotationInfo>]
-    def get_import(request)
-      data, _status_code, _headers = get_import_with_http_info(request)
+    def extract(request)
+      data, _status_code, _headers = extract_with_http_info(request)
       data
     end
 
     # Extracts annotations from document
     # 
-    # @param request get_import_request
+    # @param request extract_request
     # @return [Array<(Array<AnnotationInfo>, Fixnum, Hash)>]
     # Array<AnnotationInfo> data, response status code and response headers
-    def get_import_with_http_info(request)
-      raise ArgumentError, 'Incorrect request type' unless request.is_a? GetImportRequest
+    def extract_with_http_info(request)
+      raise ArgumentError, 'Incorrect request type' unless request.is_a? ExtractRequest
 
-      @api_client.config.logger.debug 'Calling API: AnnotateApi.get_import ...' if @api_client.config.debugging
-      # verify the required parameter 'file_path' is set
-      raise ArgumentError, 'Missing the required parameter file_path when calling AnnotateApi.get_import' if @api_client.config.client_side_validation && request.file_path.nil?
+      @api_client.config.logger.debug 'Calling API: AnnotateApi.extract ...' if @api_client.config.debugging
+      # verify the required parameter 'file_info' is set
+      raise ArgumentError, 'Missing the required parameter file_info when calling AnnotateApi.extract' if @api_client.config.client_side_validation && request.file_info.nil?
       # resource path
-      local_var_path = '/annotation'
+      local_var_path = '/annotation/extract'
 
       # query parameters
       query_params = {}
-      query_params[downcase_first_letter('filePath')] = request.file_path
-
 
       # header parameters
       header_params = {}
@@ -235,8 +205,8 @@ module GroupDocsAnnotationCloud
       form_params = {}
 
       # http body (model)
-      post_body = nil
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+      post_body = @api_client.object_to_http_body(request.file_info)
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
                                                         header_params: header_params,
                                                         query_params: query_params,
                                                         form_params: form_params,
@@ -245,40 +215,36 @@ module GroupDocsAnnotationCloud
                                                         return_type: 'Array<AnnotationInfo>')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called:
-        AnnotateApi#get_import\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        AnnotateApi#extract\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       [data, status_code, headers]
     end
 
-    # Adds annotations to document
+    # Removes annotations from document
     # 
-    # @param request post_annotations_request
-    # @return [nil]
-    def post_annotations(request)
-      post_annotations_with_http_info(request)
-      nil
+    # @param request remove_annotations_request
+    # @return [AnnotationApiLink]
+    def remove_annotations(request)
+      data, _status_code, _headers = remove_annotations_with_http_info(request)
+      data
     end
 
-    # Adds annotations to document
+    # Removes annotations from document
     # 
-    # @param request post_annotations_request
-    # @return [Array<(nil, Fixnum, Hash)>]
-    # nil, response status code and response headers
-    def post_annotations_with_http_info(request)
-      raise ArgumentError, 'Incorrect request type' unless request.is_a? PostAnnotationsRequest
+    # @param request remove_annotations_request
+    # @return [Array<(AnnotationApiLink, Fixnum, Hash)>]
+    # AnnotationApiLink data, response status code and response headers
+    def remove_annotations_with_http_info(request)
+      raise ArgumentError, 'Incorrect request type' unless request.is_a? RemoveAnnotationsRequest
 
-      @api_client.config.logger.debug 'Calling API: AnnotateApi.post_annotations ...' if @api_client.config.debugging
-      # verify the required parameter 'file_path' is set
-      raise ArgumentError, 'Missing the required parameter file_path when calling AnnotateApi.post_annotations' if @api_client.config.client_side_validation && request.file_path.nil?
-      # verify the required parameter 'annotations' is set
-      raise ArgumentError, 'Missing the required parameter annotations when calling AnnotateApi.post_annotations' if @api_client.config.client_side_validation && request.annotations.nil?
+      @api_client.config.logger.debug 'Calling API: AnnotateApi.remove_annotations ...' if @api_client.config.debugging
+      # verify the required parameter 'options' is set
+      raise ArgumentError, 'Missing the required parameter options when calling AnnotateApi.remove_annotations' if @api_client.config.client_side_validation && request.options.nil?
       # resource path
-      local_var_path = '/annotation'
+      local_var_path = '/annotation/remove'
 
       # query parameters
       query_params = {}
-      query_params[downcase_first_letter('filePath')] = request.file_path
-
 
       # header parameters
       header_params = {}
@@ -291,16 +257,17 @@ module GroupDocsAnnotationCloud
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(request.annotations)
+      post_body = @api_client.object_to_http_body(request.options)
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
                                                         header_params: header_params,
                                                         query_params: query_params,
                                                         form_params: form_params,
                                                         body: post_body,
-                                                        access_token: get_access_token)
+                                                        access_token: get_access_token,
+                                                        return_type: 'AnnotationApiLink')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called:
-        AnnotateApi#post_annotations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        AnnotateApi#remove_annotations\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       [data, status_code, headers]
     end
@@ -361,8 +328,8 @@ module GroupDocsAnnotationCloud
 end
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="delete_annotations_request.rb">
- #   Copyright (c) 2003-2020 Aspose Pty Ltd
+ # <copyright company="Aspose Pty Ltd" file="annotate_request.rb">
+ #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -389,25 +356,25 @@ end
 module GroupDocsAnnotationCloud
 
   #
-  # Request model for delete_annotations operation.
+  # Request model for annotate operation.
   #
-  class DeleteAnnotationsRequest
+  class AnnotateRequest
 
-        # Document path in storage
-        attr_accessor :file_path
+        # Annotation options
+        attr_accessor :options
 	
         #
         # Initializes a new instance.
-        # @param file_path Document path in storage
-        def initialize(file_path)
-           self.file_path = file_path
+        # @param options Annotation options
+        def initialize(options)
+           self.options = options
         end
   end
 end
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="get_export_request.rb">
- #   Copyright (c) 2003-2020 Aspose Pty Ltd
+ # <copyright company="Aspose Pty Ltd" file="annotate_direct_request.rb">
+ #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -434,45 +401,25 @@ end
 module GroupDocsAnnotationCloud
 
   #
-  # Request model for get_export operation.
+  # Request model for annotate_direct operation.
   #
-  class GetExportRequest
+  class AnnotateDirectRequest
 
-        # Document path in storage
-        attr_accessor :file_path
-        # Annotation types that will be exported. All annotation types will be exported if not specified
-        attr_accessor :annotation_types
-        # Indicates whether to export only annotated pages
-        attr_accessor :annotated_pages
-        # Determines number of first exported page
-        attr_accessor :first_page
-        # Determines number of last exported page
-        attr_accessor :last_page
-        # Source document password
-        attr_accessor :password
+        # Annotation options
+        attr_accessor :options
 	
         #
         # Initializes a new instance.
-        # @param file_path Document path in storage
-        # @param annotation_types Annotation types that will be exported. All annotation types will be exported if not specified
-        # @param annotated_pages Indicates whether to export only annotated pages
-        # @param first_page Determines number of first exported page
-        # @param last_page Determines number of last exported page
-        # @param password Source document password
-        def initialize(file_path, annotation_types = nil, annotated_pages = nil, first_page = nil, last_page = nil, password = nil)
-           self.file_path = file_path
-           self.annotation_types = annotation_types
-           self.annotated_pages = annotated_pages
-           self.first_page = first_page
-           self.last_page = last_page
-           self.password = password
+        # @param options Annotation options
+        def initialize(options)
+           self.options = options
         end
   end
 end
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="get_import_request.rb">
- #   Copyright (c) 2003-2020 Aspose Pty Ltd
+ # <copyright company="Aspose Pty Ltd" file="extract_request.rb">
+ #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -499,25 +446,25 @@ end
 module GroupDocsAnnotationCloud
 
   #
-  # Request model for get_import operation.
+  # Request model for extract operation.
   #
-  class GetImportRequest
+  class ExtractRequest
 
-        # Document path in storage
-        attr_accessor :file_path
+        # Input file information
+        attr_accessor :file_info
 	
         #
         # Initializes a new instance.
-        # @param file_path Document path in storage
-        def initialize(file_path)
-           self.file_path = file_path
+        # @param file_info Input file information
+        def initialize(file_info)
+           self.file_info = file_info
         end
   end
 end
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="post_annotations_request.rb">
- #   Copyright (c) 2003-2020 Aspose Pty Ltd
+ # <copyright company="Aspose Pty Ltd" file="remove_annotations_request.rb">
+ #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -544,22 +491,18 @@ end
 module GroupDocsAnnotationCloud
 
   #
-  # Request model for post_annotations operation.
+  # Request model for remove_annotations operation.
   #
-  class PostAnnotationsRequest
+  class RemoveAnnotationsRequest
 
-        # Document path in storage
-        attr_accessor :file_path
-        # Array of annotation descriptions
-        attr_accessor :annotations
+        # Remove annotations options
+        attr_accessor :options
 	
         #
         # Initializes a new instance.
-        # @param file_path Document path in storage
-        # @param annotations Array of annotation descriptions
-        def initialize(file_path, annotations)
-           self.file_path = file_path
-           self.annotations = annotations
+        # @param options Remove annotations options
+        def initialize(options)
+           self.options = options
         end
   end
 end

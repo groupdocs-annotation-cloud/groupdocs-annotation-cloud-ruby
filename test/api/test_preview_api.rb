@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2020 Aspose Pty Ltd
+#    Copyright (c) 2003-2021 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,12 +34,20 @@ module GroupDocsAnnotationCloud
   class TestPreviewApi < TestContext
     
     def test_get_delete_pages
-      TestFile.test_files_list_preview.each do |test_file|
-        request = GetPagesRequest.new(test_file.path, nil, nil, nil, nil, nil, nil, test_file.password)
+      TestFile.test_files_annotate.each do |test_file|
+        file_info = FileInfo.new()
+        file_info.file_path = test_file.path
+        file_info.password = test_file.password
+        options = PreviewOptions.new()
+        options.file_info = file_info
+
+        request = GetPagesRequest.new(options)
         response = @preview_api.get_pages(request)
+
         assert_operator response.total_count, :>, 0    
         assert_operator response.entries.size, :>, 0  
-        request = DeletePagesRequest.new(test_file.path)
+        
+        request = DeletePagesRequest.new(file_info)
         @preview_api.delete_pages(request)          
       end
     end  

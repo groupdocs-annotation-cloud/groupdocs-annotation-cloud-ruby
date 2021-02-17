@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2020 Aspose Pty Ltd
+#    Copyright (c) 2003-2021 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -36,25 +36,19 @@ module GroupDocsAnnotationCloud
     def test_annotations
       TestFile.test_files_list_many_pages.each do |test_file|
 
-        @annotate_api.config.logger.debug "Annotate: " + test_file.path
+        @annotate_api.config.logger.debug "Annotate many pages: " + test_file.path
         
-        # Post annotation
-        request = PostAnnotationsRequest.new(test_file.path, get_annotations())
-        response = @annotate_api.post_annotations(request)         
+        file_info = FileInfo.new()
+        file_info.file_path = test_file.path
+        file_info.password = test_file.password
+        options = AnnotateOptions.new()
+        options.file_info = file_info
+        options.annotations = get_annotations()
+        options.output_path = @@output_dir + '/' + test_file.file_name
 
-        # Import annotations
-        request = GetImportRequest.new(test_file.path)
-        response = @annotate_api.get_import(request)  
-        assert_operator response.size, :>, 0 
-
-        # Export annotations
-        request = GetExportRequest.new(test_file.path, nil, nil, nil, nil, test_file.password)
-        response = @annotate_api.get_export(request)  
-        assert_operator response.length, :>, 0  
-        
-        # Delete annotations
-        request = DeleteAnnotationsRequest.new(test_file.path)
-        @annotate_api.delete_annotations(request)
+        request = AnnotateRequest.new(options)
+        result = @annotate_api.annotate(request)   
+        assert_operator result.href.length, :>, 0
       end
     end 
 

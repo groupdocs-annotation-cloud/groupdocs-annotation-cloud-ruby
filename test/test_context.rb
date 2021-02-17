@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="test_contex.rb">
-#    Copyright (c) 2003-2020 Aspose Pty Ltd
+#    Copyright (c) 2003-2021 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -41,6 +41,7 @@ module GroupDocsAnnotationCloud
       include MiniTest::Assertions
 
       @@test_files_uploaded ||= false
+      @@output_dir = 'Output'
 
       def setup
         config = Configuration.new(TestSettings::APP_SID, TestSettings::APP_KEY)
@@ -58,7 +59,7 @@ module GroupDocsAnnotationCloud
       end
 
       def teardown 
-        # remove_folder_in_storage "annotation"
+        remove_folder_in_storage @@output_dir
       end
 
       def remove_folder_in_storage(folder)

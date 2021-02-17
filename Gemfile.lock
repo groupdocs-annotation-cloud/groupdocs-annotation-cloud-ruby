@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    groupdocs_annotation_cloud (20.10)
+    groupdocs_annotation_cloud (21.2)
       addressable (~> 2.5.0, >= 2.5.0)
       faraday (~> 0.14.0)
       mimemagic (~> 0.3.2)

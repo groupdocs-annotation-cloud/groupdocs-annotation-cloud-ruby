@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd">
-#    Copyright (c) 2003-2020 Aspose Pty Ltd
+#    Copyright (c) 2003-2021 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -42,8 +42,12 @@ module GroupDocsAnnotationCloud
     end
 
     def test_get_info
-      TestFile.test_files_list_preview.each do |test_file|
-        request = GetInfoRequest.new(test_file.path, test_file.password)
+      TestFile.test_files_annotate.each do |test_file|
+        file_info = FileInfo.new()
+        file_info.file_path = test_file.path
+        file_info.password = test_file.password
+
+        request = GetInfoRequest.new(file_info)
         response = @info_api.get_info(request)
         assert_equal test_file.path, response.path
       end

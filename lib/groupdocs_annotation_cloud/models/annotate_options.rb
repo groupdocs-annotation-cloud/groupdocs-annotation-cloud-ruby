@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="format.rb">
+ # <copyright company="Aspose Pty Ltd" file="annotate_options.rb">
  #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,28 +28,48 @@
 require 'date'
 
 module GroupDocsAnnotationCloud
-  # File format
-  class Format
+  # Defines options for annotating documents
+  class AnnotateOptions
 
-    # File format extension
-    attr_accessor :extension
+    # Input document description
+    attr_accessor :file_info
 
-    # File format name
-    attr_accessor :file_format
+    # List of annotations to add to the document
+    attr_accessor :annotations
+
+    # First page number when saving page range
+    attr_accessor :first_page
+
+    # Last page number when saving page range
+    attr_accessor :last_page
+
+    # Indicates whether to save only annotated pages
+    attr_accessor :only_annotated_pages
+
+    # Path to output document in the cloud storage. Required for Add method. Not required if Annotate (with file result) method used.
+    attr_accessor :output_path
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'extension' => :'Extension',
-        :'file_format' => :'FileFormat'
+        :'file_info' => :'FileInfo',
+        :'annotations' => :'Annotations',
+        :'first_page' => :'FirstPage',
+        :'last_page' => :'LastPage',
+        :'only_annotated_pages' => :'OnlyAnnotatedPages',
+        :'output_path' => :'OutputPath'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'extension' => :'String',
-        :'file_format' => :'String'
+        :'file_info' => :'FileInfo',
+        :'annotations' => :'Array<AnnotationInfo>',
+        :'first_page' => :'Integer',
+        :'last_page' => :'Integer',
+        :'only_annotated_pages' => :'BOOLEAN',
+        :'output_path' => :'String'
       }
     end
 
@@ -61,12 +81,30 @@ module GroupDocsAnnotationCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'Extension')
-        self.extension = attributes[:'Extension']
+      if attributes.key?(:'FileInfo')
+        self.file_info = attributes[:'FileInfo']
       end
 
-      if attributes.key?(:'FileFormat')
-        self.file_format = attributes[:'FileFormat']
+      if attributes.key?(:'Annotations')
+        if (value = attributes[:'Annotations']).is_a?(Array)
+          self.annotations = value
+        end
+      end
+
+      if attributes.key?(:'FirstPage')
+        self.first_page = attributes[:'FirstPage']
+      end
+
+      if attributes.key?(:'LastPage')
+        self.last_page = attributes[:'LastPage']
+      end
+
+      if attributes.key?(:'OnlyAnnotatedPages')
+        self.only_annotated_pages = attributes[:'OnlyAnnotatedPages']
+      end
+
+      if attributes.key?(:'OutputPath')
+        self.output_path = attributes[:'OutputPath']
       end
 
     end
@@ -75,12 +113,27 @@ module GroupDocsAnnotationCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
+      if @first_page.nil?
+        invalid_properties.push("invalid value for 'first_page', first_page cannot be nil.")
+      end
+
+      if @last_page.nil?
+        invalid_properties.push("invalid value for 'last_page', last_page cannot be nil.")
+      end
+
+      if @only_annotated_pages.nil?
+        invalid_properties.push("invalid value for 'only_annotated_pages', only_annotated_pages cannot be nil.")
+      end
+
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @first_page.nil?
+      return false if @last_page.nil?
+      return false if @only_annotated_pages.nil?
       return true
     end
 
@@ -89,8 +142,12 @@ module GroupDocsAnnotationCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          extension == other.extension &&
-          file_format == other.file_format
+          file_info == other.file_info &&
+          annotations == other.annotations &&
+          first_page == other.first_page &&
+          last_page == other.last_page &&
+          only_annotated_pages == other.only_annotated_pages &&
+          output_path == other.output_path
     end
 
     # @see the `==` method
@@ -102,7 +159,7 @@ module GroupDocsAnnotationCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [extension, file_format].hash
+      [file_info, annotations, first_page, last_page, only_annotated_pages, output_path].hash
     end
 
     # Downcases first letter.

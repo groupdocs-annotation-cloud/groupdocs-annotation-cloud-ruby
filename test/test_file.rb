@@ -1,7 +1,7 @@
 #
 # --------------------------------------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="test_file.rb">
-#    Copyright (c) 2003-2020 Aspose Pty Ltd
+#    Copyright (c) 2003-2021 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -163,8 +163,63 @@ module GroupDocsAnnotationCloud
             f.file_name = "ten-pages.docx"
             f.folder = "words\\"
             f
+        end      
+        
+        def self.InputWords
+            f = TestFile.new
+            f.file_name = "input.docx"
+            f.folder = "input\\"
+            f
         end        
 
+        def self.InputCells
+            f = TestFile.new
+            f.file_name = "input.xlsx"
+            f.folder = "input\\"
+            f
+        end  
+        
+        def self.InputEmail
+            f = TestFile.new
+            f.file_name = "input.eml"
+            f.folder = "input\\"
+            f
+        end  
+        
+        def self.InputHtml
+            f = TestFile.new
+            f.file_name = "input.html"
+            f.folder = "input\\"
+            f
+        end  
+        
+        def self.InputPdf
+            f = TestFile.new
+            f.file_name = "input.pdf"
+            f.folder = "input\\"
+            f
+        end  
+        
+        def self.InputImage
+            f = TestFile.new
+            f.file_name = "input.png"
+            f.folder = "input\\"
+            f
+        end  
+        
+        def self.InputPresentation
+            f = TestFile.new
+            f.file_name = "input.pptx"
+            f.folder = "input\\"
+            f
+        end  
+        
+        def self.InputDiagram
+            f = TestFile.new
+            f.file_name = "input.vsdx"
+            f.folder = "input\\"
+            f
+        end          
 
         def self.test_files_list_upload
             [
@@ -185,70 +240,57 @@ module GroupDocsAnnotationCloud
                 self.TenPagesSlides,
                 self.OnePageWords,
                 self.OnePagePasswordWords,
-                self.TenPagesWords
+                self.TenPagesWords,
+                self.InputWords,
+                self.InputCells,
+                self.InputEmail,
+                self.InputHtml,
+                self.InputPdf,
+                self.InputImage,
+                self.InputPresentation,
+                self.InputDiagram
             ]        
         end
 
-        def self.test_files_list_preview
+        def self.test_files_annotate
             [
                 self.OnePageCells,
-                self.TenPagesCells,
+                self.OnePagePasswordCells,                
                 self.OnePageDiagram,
-                self.TenPagesDiagram,
                 self.OnePageEmail,
                 self.OnePageHtml,
                 self.OnePageBmp,
                 self.OnePagePng,
                 self.OnePagePdf,
                 self.OnePagePasswordPdf,
-                self.TenPagesPdf,
                 self.OnePageSlides,
-                self.TenPagesSlides,
-                self.OnePageWords
-            ]        
-        end
-
-        def self.test_files_list
-            [
-                self.OnePageCells,
-                self.OnePageDiagram,
-                self.OnePageEmail,
-                self.OnePageHtml,
-                self.OnePageBmp,
-                self.OnePagePng,
-                self.OnePagePdf,
-                self.OnePagePasswordPdf,
+                self.OnePagePasswordSlides,
                 self.OnePageWords,
-                self.OnePageSlides,
-                self.OnePagePasswordWords,
+                self.OnePagePasswordWords
             ]        
         end        
 
-        def self.test_files_list_no_password
-            [
-                self.OnePageCells,
-                self.TenPagesCells,
-                self.OnePageDiagram,
-                self.TenPagesDiagram,
-                self.OnePageEmail,
-                self.OnePageHtml,
-                self.OnePageBmp,
-                self.OnePagePng,
-                self.OnePagePdf,
-                self.TenPagesPdf,
-                self.OnePageSlides,
-                self.TenPagesSlides,
-                self.OnePageWords,
-                self.TenPagesWords
-            ]        
-        end  
         
         def self.test_files_list_many_pages
             [
                 self.TenPagesCells,
                 self.TenPagesDiagram,
+                self.TenPagesSlides,
                 self.TenPagesWords
             ]        
-        end         
+        end
+
+        def self.test_files_with_annotations
+            [
+                self.InputWords,
+                self.InputCells,
+                self.InputEmail,
+                self.InputHtml,
+                self.InputPdf,
+                self.InputImage,
+                self.InputPresentation,
+                self.InputDiagram
+            ]        
+        end        
     end
 end

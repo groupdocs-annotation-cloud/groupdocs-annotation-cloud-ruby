@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="format.rb">
+ # <copyright company="Aspose Pty Ltd" file="preview_options.rb">
  #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,28 +28,69 @@
 require 'date'
 
 module GroupDocsAnnotationCloud
-  # File format
-  class Format
+  # Represents options for GetPages API method
+  class PreviewOptions
 
-    # File format extension
-    attr_accessor :extension
+    # Input document description
+    attr_accessor :file_info
 
-    # File format name
-    attr_accessor :file_format
+    # Preview format. Supported values are: PNG, JPEG or BMP. Default value is PNG.
+    attr_accessor :format
+
+    # Page numbers to preview. All pages proceeded if not specified.
+    attr_accessor :page_numbers
+
+    # Preview image width. Not required. Default width used if not specified or 0.
+    attr_accessor :width
+
+    # Preview image height. Not required. Default width used if not specified or 0.
+    attr_accessor :height
+
+    # Render document comments. Default value is 'false'.
+    attr_accessor :render_comments
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'extension' => :'Extension',
-        :'file_format' => :'FileFormat'
+        :'file_info' => :'FileInfo',
+        :'format' => :'Format',
+        :'page_numbers' => :'PageNumbers',
+        :'width' => :'Width',
+        :'height' => :'Height',
+        :'render_comments' => :'RenderComments'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'extension' => :'String',
-        :'file_format' => :'String'
+        :'file_info' => :'FileInfo',
+        :'format' => :'String',
+        :'page_numbers' => :'Array<Integer>',
+        :'width' => :'Integer',
+        :'height' => :'Integer',
+        :'render_comments' => :'BOOLEAN'
       }
     end
 
@@ -61,12 +102,30 @@ module GroupDocsAnnotationCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'Extension')
-        self.extension = attributes[:'Extension']
+      if attributes.key?(:'FileInfo')
+        self.file_info = attributes[:'FileInfo']
       end
 
-      if attributes.key?(:'FileFormat')
-        self.file_format = attributes[:'FileFormat']
+      if attributes.key?(:'Format')
+        self.format = attributes[:'Format']
+      end
+
+      if attributes.key?(:'PageNumbers')
+        if (value = attributes[:'PageNumbers']).is_a?(Array)
+          self.page_numbers = value
+        end
+      end
+
+      if attributes.key?(:'Width')
+        self.width = attributes[:'Width']
+      end
+
+      if attributes.key?(:'Height')
+        self.height = attributes[:'Height']
+      end
+
+      if attributes.key?(:'RenderComments')
+        self.render_comments = attributes[:'RenderComments']
       end
 
     end
@@ -75,13 +134,50 @@ module GroupDocsAnnotationCloud
     # @return Array for valid properies with the reasons
     def list_invalid_properties
       invalid_properties = []
+      if @format.nil?
+        invalid_properties.push("invalid value for 'format', format cannot be nil.")
+      end
+
+      if @width.nil?
+        invalid_properties.push("invalid value for 'width', width cannot be nil.")
+      end
+
+      if @height.nil?
+        invalid_properties.push("invalid value for 'height', height cannot be nil.")
+      end
+
+      if @render_comments.nil?
+        invalid_properties.push("invalid value for 'render_comments', render_comments cannot be nil.")
+      end
+
       return invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if @format.nil?
+      format_validator = EnumAttributeValidator.new('String', ["PNG", "JPEG", "BMP"])
+      return false unless format_validator.valid?(@format)
+      return false if @width.nil?
+      return false if @height.nil?
+      return false if @render_comments.nil?
       return true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] format Object to be assigned
+    def format=(format)
+      validator = EnumAttributeValidator.new('String', ["PNG", "JPEG", "BMP"])
+      if format.to_i == 0
+        unless validator.valid?(format)
+          # raise ArgumentError, "invalid value for 'format', must be one of #{validator.allowable_values}."
+           @format = validator.allowable_values[format.to_i]
+        end
+        @format = format
+      else
+        @format = validator.allowable_values[format.to_i]
+      end
     end
 
     # Checks equality by comparing each attribute.
@@ -89,8 +185,12 @@ module GroupDocsAnnotationCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          extension == other.extension &&
-          file_format == other.file_format
+          file_info == other.file_info &&
+          format == other.format &&
+          page_numbers == other.page_numbers &&
+          width == other.width &&
+          height == other.height &&
+          render_comments == other.render_comments
     end
 
     # @see the `==` method
@@ -102,7 +202,7 @@ module GroupDocsAnnotationCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [extension, file_format].hash
+      [file_info, format, page_numbers, width, height, render_comments].hash
     end
 
     # Downcases first letter.

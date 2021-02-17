@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="format.rb">
+ # <copyright company="Aspose Pty Ltd" file="remove_options.rb">
  #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,28 +28,33 @@
 require 'date'
 
 module GroupDocsAnnotationCloud
-  # File format
-  class Format
+  # Options for removing annotations
+  class RemoveOptions
 
-    # File format extension
-    attr_accessor :extension
+    # Input document description
+    attr_accessor :file_info
 
-    # File format name
-    attr_accessor :file_format
+    # List of annotation IDs to remove from the document
+    attr_accessor :annotation_ids
+
+    # Path to output document in the cloud storage.
+    attr_accessor :output_path
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'extension' => :'Extension',
-        :'file_format' => :'FileFormat'
+        :'file_info' => :'FileInfo',
+        :'annotation_ids' => :'AnnotationIds',
+        :'output_path' => :'OutputPath'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'extension' => :'String',
-        :'file_format' => :'String'
+        :'file_info' => :'FileInfo',
+        :'annotation_ids' => :'Array<Integer>',
+        :'output_path' => :'String'
       }
     end
 
@@ -61,12 +66,18 @@ module GroupDocsAnnotationCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'Extension')
-        self.extension = attributes[:'Extension']
+      if attributes.key?(:'FileInfo')
+        self.file_info = attributes[:'FileInfo']
       end
 
-      if attributes.key?(:'FileFormat')
-        self.file_format = attributes[:'FileFormat']
+      if attributes.key?(:'AnnotationIds')
+        if (value = attributes[:'AnnotationIds']).is_a?(Array)
+          self.annotation_ids = value
+        end
+      end
+
+      if attributes.key?(:'OutputPath')
+        self.output_path = attributes[:'OutputPath']
       end
 
     end
@@ -89,8 +100,9 @@ module GroupDocsAnnotationCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          extension == other.extension &&
-          file_format == other.file_format
+          file_info == other.file_info &&
+          annotation_ids == other.annotation_ids &&
+          output_path == other.output_path
     end
 
     # @see the `==` method
@@ -102,7 +114,7 @@ module GroupDocsAnnotationCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [extension, file_format].hash
+      [file_info, annotation_ids, output_path].hash
     end
 
     # Downcases first letter.

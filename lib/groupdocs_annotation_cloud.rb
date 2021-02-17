@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="groupdocs_annotation_cloud.rb">
-#   Copyright (c) 2003-2020 Aspose Pty Ltd
+#   Copyright (c) 2003-2021 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,12 +30,14 @@ require_relative 'groupdocs_annotation_cloud/version'
 require_relative 'groupdocs_annotation_cloud/configuration'
 
 # Models
+require_relative 'groupdocs_annotation_cloud/models/annotate_options'
 require_relative 'groupdocs_annotation_cloud/models/annotation_info'
 require_relative 'groupdocs_annotation_cloud/models/annotation_reply_info'
 require_relative 'groupdocs_annotation_cloud/models/disc_usage'
 require_relative 'groupdocs_annotation_cloud/models/document_info'
 require_relative 'groupdocs_annotation_cloud/models/error'
 require_relative 'groupdocs_annotation_cloud/models/error_details'
+require_relative 'groupdocs_annotation_cloud/models/file_info'
 require_relative 'groupdocs_annotation_cloud/models/file_versions'
 require_relative 'groupdocs_annotation_cloud/models/files_list'
 require_relative 'groupdocs_annotation_cloud/models/files_upload_result'
@@ -47,7 +49,9 @@ require_relative 'groupdocs_annotation_cloud/models/object_exist'
 require_relative 'groupdocs_annotation_cloud/models/page_images'
 require_relative 'groupdocs_annotation_cloud/models/page_info'
 require_relative 'groupdocs_annotation_cloud/models/point'
+require_relative 'groupdocs_annotation_cloud/models/preview_options'
 require_relative 'groupdocs_annotation_cloud/models/rectangle'
+require_relative 'groupdocs_annotation_cloud/models/remove_options'
 require_relative 'groupdocs_annotation_cloud/models/storage_exist'
 require_relative 'groupdocs_annotation_cloud/models/storage_file'
 require_relative 'groupdocs_annotation_cloud/models/annotation_api_link'

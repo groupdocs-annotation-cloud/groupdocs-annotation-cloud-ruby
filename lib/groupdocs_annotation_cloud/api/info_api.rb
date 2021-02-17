@@ -1,6 +1,6 @@
 # -----------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="info.rb">
-#   Copyright (c) 2003-2020 Aspose Pty Ltd
+#   Copyright (c) 2003-2021 Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -82,20 +82,13 @@ module GroupDocsAnnotationCloud
       raise ArgumentError, 'Incorrect request type' unless request.is_a? GetInfoRequest
 
       @api_client.config.logger.debug 'Calling API: InfoApi.get_info ...' if @api_client.config.debugging
-      # verify the required parameter 'file_path' is set
-      raise ArgumentError, 'Missing the required parameter file_path when calling InfoApi.get_info' if @api_client.config.client_side_validation && request.file_path.nil?
+      # verify the required parameter 'file_info' is set
+      raise ArgumentError, 'Missing the required parameter file_info when calling InfoApi.get_info' if @api_client.config.client_side_validation && request.file_info.nil?
       # resource path
       local_var_path = '/annotation/info'
 
       # query parameters
       query_params = {}
-      query_params[downcase_first_letter('filePath')] = request.file_path
-
-      if local_var_path.include? ('{' + downcase_first_letter('password') + '}')
-        local_var_path = local_var_path.sub('{' + downcase_first_letter('password') + '}', request.password.to_s)
-      else
-        query_params[downcase_first_letter('password')] = request.password unless request.password.nil?
-      end
 
       # header parameters
       header_params = {}
@@ -108,8 +101,8 @@ module GroupDocsAnnotationCloud
       form_params = {}
 
       # http body (model)
-      post_body = nil
-      data, status_code, headers = @api_client.call_api(:GET, local_var_path,
+      post_body = @api_client.object_to_http_body(request.file_info)
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
                                                         header_params: header_params,
                                                         query_params: query_params,
                                                         form_params: form_params,
@@ -229,7 +222,7 @@ end
  #
  # --------------------------------------------------------------------------------------------------------------------
  # <copyright company="Aspose Pty Ltd" file="get_info_request.rb">
- #   Copyright (c) 2003-2020 Aspose Pty Ltd
+ #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
  #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -260,18 +253,14 @@ module GroupDocsAnnotationCloud
   #
   class GetInfoRequest
 
-        # Document path in storage
-        attr_accessor :file_path
-        # Source document password
-        attr_accessor :password
+        # Document path in storage and password
+        attr_accessor :file_info
 	
         #
         # Initializes a new instance.
-        # @param file_path Document path in storage
-        # @param password Source document password
-        def initialize(file_path, password = nil)
-           self.file_path = file_path
-           self.password = password
+        # @param file_info Document path in storage and password
+        def initialize(file_info)
+           self.file_info = file_info
         end
   end
 end

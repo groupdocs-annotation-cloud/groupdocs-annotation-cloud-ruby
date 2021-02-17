@@ -1,6 +1,6 @@
  #
  # --------------------------------------------------------------------------------------------------------------------
- # <copyright company="Aspose Pty Ltd" file="format.rb">
+ # <copyright company="Aspose Pty Ltd" file="file_info.rb">
  #   Copyright (c) 2003-2021 Aspose Pty Ltd
  # </copyright>
  # <summary>
@@ -28,28 +28,38 @@
 require 'date'
 
 module GroupDocsAnnotationCloud
-  # File format
-  class Format
+  # File info
+  class FileInfo
 
-    # File format extension
-    attr_accessor :extension
+    # File path in storage
+    attr_accessor :file_path
 
-    # File format name
-    attr_accessor :file_format
+    # Storage name
+    attr_accessor :storage_name
+
+    # Version ID
+    attr_accessor :version_id
+
+    # Password to open file
+    attr_accessor :password
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'extension' => :'Extension',
-        :'file_format' => :'FileFormat'
+        :'file_path' => :'FilePath',
+        :'storage_name' => :'StorageName',
+        :'version_id' => :'VersionId',
+        :'password' => :'Password'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'extension' => :'String',
-        :'file_format' => :'String'
+        :'file_path' => :'String',
+        :'storage_name' => :'String',
+        :'version_id' => :'String',
+        :'password' => :'String'
       }
     end
 
@@ -61,12 +71,20 @@ module GroupDocsAnnotationCloud
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.key?(:'Extension')
-        self.extension = attributes[:'Extension']
+      if attributes.key?(:'FilePath')
+        self.file_path = attributes[:'FilePath']
       end
 
-      if attributes.key?(:'FileFormat')
-        self.file_format = attributes[:'FileFormat']
+      if attributes.key?(:'StorageName')
+        self.storage_name = attributes[:'StorageName']
+      end
+
+      if attributes.key?(:'VersionId')
+        self.version_id = attributes[:'VersionId']
+      end
+
+      if attributes.key?(:'Password')
+        self.password = attributes[:'Password']
       end
 
     end
@@ -89,8 +107,10 @@ module GroupDocsAnnotationCloud
     def ==(other)
       return true if self.equal?(other)
       self.class == other.class &&
-          extension == other.extension &&
-          file_format == other.file_format
+          file_path == other.file_path &&
+          storage_name == other.storage_name &&
+          version_id == other.version_id &&
+          password == other.password
     end
 
     # @see the `==` method
@@ -102,7 +122,7 @@ module GroupDocsAnnotationCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [extension, file_format].hash
+      [file_path, storage_name, version_id, password].hash
     end
 
     # Downcases first letter.
