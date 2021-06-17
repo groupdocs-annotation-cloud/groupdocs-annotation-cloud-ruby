@@ -46,8 +46,17 @@ module GroupDocsAnnotationCloud
     # Preview image height. Not required. Default width used if not specified or 0.
     attr_accessor :height
 
+    # Gets or sets the resolution for generated images, in dots per inch. The default value is 96.
+    attr_accessor :resolution
+
     # Render document comments. Default value is 'false'.
     attr_accessor :render_comments
+
+    # The property that controls whether annotations will be generated on the preview. Default State - true.
+    attr_accessor :render_annotations
+
+    # The path to directory containing custom fonts in storage
+    attr_accessor :fonts_path
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -78,7 +87,10 @@ module GroupDocsAnnotationCloud
         :'page_numbers' => :'PageNumbers',
         :'width' => :'Width',
         :'height' => :'Height',
-        :'render_comments' => :'RenderComments'
+        :'resolution' => :'Resolution',
+        :'render_comments' => :'RenderComments',
+        :'render_annotations' => :'RenderAnnotations',
+        :'fonts_path' => :'FontsPath'
       }
     end
 
@@ -90,7 +102,10 @@ module GroupDocsAnnotationCloud
         :'page_numbers' => :'Array<Integer>',
         :'width' => :'Integer',
         :'height' => :'Integer',
-        :'render_comments' => :'BOOLEAN'
+        :'resolution' => :'Integer',
+        :'render_comments' => :'BOOLEAN',
+        :'render_annotations' => :'BOOLEAN',
+        :'fonts_path' => :'String'
       }
     end
 
@@ -124,8 +139,20 @@ module GroupDocsAnnotationCloud
         self.height = attributes[:'Height']
       end
 
+      if attributes.key?(:'Resolution')
+        self.resolution = attributes[:'Resolution']
+      end
+
       if attributes.key?(:'RenderComments')
         self.render_comments = attributes[:'RenderComments']
+      end
+
+      if attributes.key?(:'RenderAnnotations')
+        self.render_annotations = attributes[:'RenderAnnotations']
+      end
+
+      if attributes.key?(:'FontsPath')
+        self.fonts_path = attributes[:'FontsPath']
       end
 
     end
@@ -146,8 +173,16 @@ module GroupDocsAnnotationCloud
         invalid_properties.push("invalid value for 'height', height cannot be nil.")
       end
 
+      if @resolution.nil?
+        invalid_properties.push("invalid value for 'resolution', resolution cannot be nil.")
+      end
+
       if @render_comments.nil?
         invalid_properties.push("invalid value for 'render_comments', render_comments cannot be nil.")
+      end
+
+      if @render_annotations.nil?
+        invalid_properties.push("invalid value for 'render_annotations', render_annotations cannot be nil.")
       end
 
       return invalid_properties
@@ -161,7 +196,9 @@ module GroupDocsAnnotationCloud
       return false unless format_validator.valid?(@format)
       return false if @width.nil?
       return false if @height.nil?
+      return false if @resolution.nil?
       return false if @render_comments.nil?
+      return false if @render_annotations.nil?
       return true
     end
 
@@ -190,7 +227,10 @@ module GroupDocsAnnotationCloud
           page_numbers == other.page_numbers &&
           width == other.width &&
           height == other.height &&
-          render_comments == other.render_comments
+          resolution == other.resolution &&
+          render_comments == other.render_comments &&
+          render_annotations == other.render_annotations &&
+          fonts_path == other.fonts_path
     end
 
     # @see the `==` method
@@ -202,7 +242,7 @@ module GroupDocsAnnotationCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [file_info, format, page_numbers, width, height, render_comments].hash
+      [file_info, format, page_numbers, width, height, resolution, render_comments, render_annotations, fonts_path].hash
     end
 
     # Downcases first letter.

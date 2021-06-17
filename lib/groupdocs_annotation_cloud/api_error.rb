@@ -39,10 +39,23 @@ module GroupDocsAnnotationCloud
         
         if arg.key?(:response_body) then
           data = JSON.parse(arg[:response_body], :symbolize_names => true)
-          if !data.nil? && !data[:error].nil? then
-            @message = data[:error]
-          elsif !data.nil? && !data[:Error].nil? && !data[:Error][:Message].nil? then
-            @message = data[:Error][:Message]
+          if !data.nil? then
+            if !data[:error].nil? then
+              error = data[:error]
+              if error.kind_of?(String) then
+                @message = error
+              else
+                @message = error[:message]
+              end
+            else
+              message = data[:message]
+              if !message.nil? && message.kind_of?(String) then
+                @message = message
+                @code = data[:code]
+              else
+                @message = data
+              end              
+            end
           end
         end
 

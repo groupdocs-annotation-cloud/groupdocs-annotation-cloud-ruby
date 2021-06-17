@@ -49,6 +49,9 @@ module GroupDocsAnnotationCloud
     # Path to output document in the cloud storage. Required for Add method. Not required if Annotate (with file result) method used.
     attr_accessor :output_path
 
+    # The path to directory containing custom fonts in storage
+    attr_accessor :fonts_path
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
@@ -57,7 +60,8 @@ module GroupDocsAnnotationCloud
         :'first_page' => :'FirstPage',
         :'last_page' => :'LastPage',
         :'only_annotated_pages' => :'OnlyAnnotatedPages',
-        :'output_path' => :'OutputPath'
+        :'output_path' => :'OutputPath',
+        :'fonts_path' => :'FontsPath'
       }
     end
 
@@ -69,7 +73,8 @@ module GroupDocsAnnotationCloud
         :'first_page' => :'Integer',
         :'last_page' => :'Integer',
         :'only_annotated_pages' => :'BOOLEAN',
-        :'output_path' => :'String'
+        :'output_path' => :'String',
+        :'fonts_path' => :'String'
       }
     end
 
@@ -105,6 +110,10 @@ module GroupDocsAnnotationCloud
 
       if attributes.key?(:'OutputPath')
         self.output_path = attributes[:'OutputPath']
+      end
+
+      if attributes.key?(:'FontsPath')
+        self.fonts_path = attributes[:'FontsPath']
       end
 
     end
@@ -147,7 +156,8 @@ module GroupDocsAnnotationCloud
           first_page == other.first_page &&
           last_page == other.last_page &&
           only_annotated_pages == other.only_annotated_pages &&
-          output_path == other.output_path
+          output_path == other.output_path &&
+          fonts_path == other.fonts_path
     end
 
     # @see the `==` method
@@ -159,7 +169,7 @@ module GroupDocsAnnotationCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [file_info, annotations, first_page, last_page, only_annotated_pages, output_path].hash
+      [file_info, annotations, first_page, last_page, only_annotated_pages, output_path, fonts_path].hash
     end
 
     # Downcases first letter.

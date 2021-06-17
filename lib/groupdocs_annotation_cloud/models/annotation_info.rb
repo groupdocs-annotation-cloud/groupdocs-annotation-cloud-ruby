@@ -106,6 +106,9 @@ module GroupDocsAnnotationCloud
     # Gets or sets the watermark annotation's rotation angle
     attr_accessor :angle
 
+    # Gets or sets z-index. Default value is 0 The z-index property specifies the stack order of an element.
+    attr_accessor :z_index
+
     # Gets or sets annotation link url
     attr_accessor :url
 
@@ -161,6 +164,7 @@ module GroupDocsAnnotationCloud
         :'font_size' => :'FontSize',
         :'opacity' => :'Opacity',
         :'angle' => :'Angle',
+        :'z_index' => :'ZIndex',
         :'url' => :'Url',
         :'image_path' => :'ImagePath'
       }
@@ -194,6 +198,7 @@ module GroupDocsAnnotationCloud
         :'font_size' => :'Float',
         :'opacity' => :'Float',
         :'angle' => :'Float',
+        :'z_index' => :'Integer',
         :'url' => :'String',
         :'image_path' => :'String'
       }
@@ -311,6 +316,10 @@ module GroupDocsAnnotationCloud
         self.angle = attributes[:'Angle']
       end
 
+      if attributes.key?(:'ZIndex')
+        self.z_index = attributes[:'ZIndex']
+      end
+
       if attributes.key?(:'Url')
         self.url = attributes[:'Url']
       end
@@ -353,6 +362,10 @@ module GroupDocsAnnotationCloud
         invalid_properties.push("invalid value for 'created_on', created_on cannot be nil.")
       end
 
+      if @z_index.nil?
+        invalid_properties.push("invalid value for 'z_index', z_index cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -374,6 +387,7 @@ module GroupDocsAnnotationCloud
       return false if @created_on.nil?
       pen_style_validator = EnumAttributeValidator.new('String', ["Solid", "Dash", "DashDot", "Dot", "LongDash", "DashDotDot"])
       return false unless pen_style_validator.valid?(@pen_style)
+      return false if @z_index.nil?
       return true
     end
 
@@ -467,6 +481,7 @@ module GroupDocsAnnotationCloud
           font_size == other.font_size &&
           opacity == other.opacity &&
           angle == other.angle &&
+          z_index == other.z_index &&
           url == other.url &&
           image_path == other.image_path
     end
@@ -480,7 +495,7 @@ module GroupDocsAnnotationCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, text, text_to_replace, horizontal_alignment, vertical_alignment, creator_id, creator_name, creator_email, box, points, page_number, annotation_position, svg_path, type, replies, created_on, font_color, pen_color, pen_width, pen_style, background_color, font_family, font_size, opacity, angle, url, image_path].hash
+      [id, text, text_to_replace, horizontal_alignment, vertical_alignment, creator_id, creator_name, creator_email, box, points, page_number, annotation_position, svg_path, type, replies, created_on, font_color, pen_color, pen_width, pen_style, background_color, font_family, font_size, opacity, angle, z_index, url, image_path].hash
     end
 
     # Downcases first letter.

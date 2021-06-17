@@ -46,12 +46,21 @@ module GroupDocsAnnotationCloud
         file_info = FileInfo.new()
         file_info.file_path = test_file.path
         file_info.password = test_file.password
-
         request = GetInfoRequest.new(file_info)
         response = @info_api.get_info(request)
         assert_equal test_file.path, response.path
       end
     end  
+
+    def test_get_info_file_not_found
+      file_info = FileInfo.new()
+      file_info.file_path = "some-folder\\NotExist.docx"
+      request = GetInfoRequest.new(file_info)
+      error = assert_raises ApiError do
+        @info_api.get_info(request)
+      end
+      assert_equal "Specified file not found", error.message
+    end      
 
   end
 end
