@@ -13,7 +13,7 @@ gem install groupdocs_annotation_cloud
 To add dependency to your app copy following into your Gemfile and run `bundle install`:
 
 ```
-gem "groupdocs_annotation_cloud", "~> 21.6"
+gem "groupdocs_annotation_cloud", "~> 22.2"
 ```
 
 ## Getting Started

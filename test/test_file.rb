@@ -257,8 +257,6 @@ module GroupDocsAnnotationCloud
                 self.OnePageCells,
                 self.OnePagePasswordCells,                
                 self.OnePageDiagram,
-                self.OnePageEmail,
-                self.OnePageHtml,
                 self.OnePageBmp,
                 self.OnePagePng,
                 self.OnePagePdf,

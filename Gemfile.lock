@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    groupdocs_annotation_cloud (21.6)
+    groupdocs_annotation_cloud (22.2)
       addressable (~> 2.5.0, >= 2.5.0)
       faraday (~> 0.14.0)
 
@@ -12,10 +12,10 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     faraday (0.14.0)
       multipart-post (>= 1.2, < 3)
-    minitest (5.11.3)
+    minitest (5.15.0)
     multipart-post (2.1.1)
     public_suffix (3.1.1)
-    rake (13.0.1)
+    rake (13.0.6)
 
 PLATFORMS
   x64-mingw32

@@ -94,6 +94,9 @@ module GroupDocsAnnotationCloud
     # Gets or sets the annotation's background color 
     attr_accessor :background_color
 
+    # Gets or sets annotation color
+    attr_accessor :squiggly_color
+
     # Gets or sets the annotation's font family
     attr_accessor :font_family
 
@@ -114,6 +117,9 @@ module GroupDocsAnnotationCloud
 
     # Gets or sets image file path in cloud storage, for Image annotations
     attr_accessor :image_path
+
+    # Sets auto scale for watermark annotation
+    attr_accessor :auto_scale
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -160,13 +166,15 @@ module GroupDocsAnnotationCloud
         :'pen_width' => :'PenWidth',
         :'pen_style' => :'PenStyle',
         :'background_color' => :'BackgroundColor',
+        :'squiggly_color' => :'SquigglyColor',
         :'font_family' => :'FontFamily',
         :'font_size' => :'FontSize',
         :'opacity' => :'Opacity',
         :'angle' => :'Angle',
         :'z_index' => :'ZIndex',
         :'url' => :'Url',
-        :'image_path' => :'ImagePath'
+        :'image_path' => :'ImagePath',
+        :'auto_scale' => :'AutoScale'
       }
     end
 
@@ -194,13 +202,15 @@ module GroupDocsAnnotationCloud
         :'pen_width' => :'Integer',
         :'pen_style' => :'String',
         :'background_color' => :'Integer',
+        :'squiggly_color' => :'Integer',
         :'font_family' => :'String',
         :'font_size' => :'Float',
         :'opacity' => :'Float',
         :'angle' => :'Float',
         :'z_index' => :'Integer',
         :'url' => :'String',
-        :'image_path' => :'String'
+        :'image_path' => :'String',
+        :'auto_scale' => :'BOOLEAN'
       }
     end
 
@@ -300,6 +310,10 @@ module GroupDocsAnnotationCloud
         self.background_color = attributes[:'BackgroundColor']
       end
 
+      if attributes.key?(:'SquigglyColor')
+        self.squiggly_color = attributes[:'SquigglyColor']
+      end
+
       if attributes.key?(:'FontFamily')
         self.font_family = attributes[:'FontFamily']
       end
@@ -326,6 +340,10 @@ module GroupDocsAnnotationCloud
 
       if attributes.key?(:'ImagePath')
         self.image_path = attributes[:'ImagePath']
+      end
+
+      if attributes.key?(:'AutoScale')
+        self.auto_scale = attributes[:'AutoScale']
       end
 
     end
@@ -366,6 +384,10 @@ module GroupDocsAnnotationCloud
         invalid_properties.push("invalid value for 'z_index', z_index cannot be nil.")
       end
 
+      if @auto_scale.nil?
+        invalid_properties.push("invalid value for 'auto_scale', auto_scale cannot be nil.")
+      end
+
       return invalid_properties
     end
 
@@ -382,12 +404,13 @@ module GroupDocsAnnotationCloud
       return false if @creator_id.nil?
       return false if @box.nil?
       return false if @type.nil?
-      type_validator = EnumAttributeValidator.new('String', ["None", "Area", "Arrow", "Distance", "Ellipse", "Link", "Point", "Polyline", "ResourcesRedaction", "TextField", "TextHighlight", "TextRedaction", "TextReplacement", "TextStrikeout", "TextUnderline", "Watermark", "Image"])
+      type_validator = EnumAttributeValidator.new('String', ["None", "Area", "Arrow", "Distance", "Ellipse", "Link", "Point", "Polyline", "ResourcesRedaction", "TextField", "TextHighlight", "TextRedaction", "TextReplacement", "TextStrikeout", "TextUnderline", "Watermark", "Image", "TextSquiggly"])
       return false unless type_validator.valid?(@type)
       return false if @created_on.nil?
       pen_style_validator = EnumAttributeValidator.new('String', ["Solid", "Dash", "DashDot", "Dot", "LongDash", "DashDotDot"])
       return false unless pen_style_validator.valid?(@pen_style)
       return false if @z_index.nil?
+      return false if @auto_scale.nil?
       return true
     end
 
@@ -424,7 +447,7 @@ module GroupDocsAnnotationCloud
     # Custom attribute writer method checking allowed values (enum).
     # @param [Object] type Object to be assigned
     def type=(type)
-      validator = EnumAttributeValidator.new('String', ["None", "Area", "Arrow", "Distance", "Ellipse", "Link", "Point", "Polyline", "ResourcesRedaction", "TextField", "TextHighlight", "TextRedaction", "TextReplacement", "TextStrikeout", "TextUnderline", "Watermark", "Image"])
+      validator = EnumAttributeValidator.new('String', ["None", "Area", "Arrow", "Distance", "Ellipse", "Link", "Point", "Polyline", "ResourcesRedaction", "TextField", "TextHighlight", "TextRedaction", "TextReplacement", "TextStrikeout", "TextUnderline", "Watermark", "Image", "TextSquiggly"])
       if type.to_i == 0
         unless validator.valid?(type)
           # raise ArgumentError, "invalid value for 'type', must be one of #{validator.allowable_values}."
@@ -477,13 +500,15 @@ module GroupDocsAnnotationCloud
           pen_width == other.pen_width &&
           pen_style == other.pen_style &&
           background_color == other.background_color &&
+          squiggly_color == other.squiggly_color &&
           font_family == other.font_family &&
           font_size == other.font_size &&
           opacity == other.opacity &&
           angle == other.angle &&
           z_index == other.z_index &&
           url == other.url &&
-          image_path == other.image_path
+          image_path == other.image_path &&
+          auto_scale == other.auto_scale
     end
 
     # @see the `==` method
@@ -495,7 +520,7 @@ module GroupDocsAnnotationCloud
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, text, text_to_replace, horizontal_alignment, vertical_alignment, creator_id, creator_name, creator_email, box, points, page_number, annotation_position, svg_path, type, replies, created_on, font_color, pen_color, pen_width, pen_style, background_color, font_family, font_size, opacity, angle, z_index, url, image_path].hash
+      [id, text, text_to_replace, horizontal_alignment, vertical_alignment, creator_id, creator_name, creator_email, box, points, page_number, annotation_position, svg_path, type, replies, created_on, font_color, pen_color, pen_width, pen_style, background_color, squiggly_color, font_family, font_size, opacity, angle, z_index, url, image_path, auto_scale].hash
     end
 
     # Downcases first letter.
