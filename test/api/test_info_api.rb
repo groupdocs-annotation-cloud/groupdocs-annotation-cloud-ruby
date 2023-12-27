@@ -56,7 +56,7 @@ module GroupDocsAnnotationCloud
       file_info = FileInfo.new()
       file_info.file_path = "some-folder\\NotExist.docx"
       request = GetInfoRequest.new(file_info)
-      error = assert_raises ApiError do
+      error = assert_raises ApiClientError do
         @info_api.get_info(request)
       end
       assert_equal "Specified file not found", error.message

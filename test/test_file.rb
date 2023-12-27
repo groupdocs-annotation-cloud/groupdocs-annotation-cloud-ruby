@@ -282,8 +282,8 @@ module GroupDocsAnnotationCloud
             [
                 self.InputWords,
                 self.InputCells,
-                self.InputEmail,
-                self.InputHtml,
+                #self.InputEmail,
+                #self.InputHtml,
                 self.InputPdf,
                 self.InputImage,
                 self.InputPresentation,

@@ -1,5 +1,5 @@
 # -----------------------------------------------------------------------------------
-# <copyright company="Aspose Pty Ltd" file="api_error.rb">
+# <copyright company="Aspose Pty Ltd" file="api_client_error.rb">
 #   Copyright (c) 2003-2023 Aspose Pty Ltd
 # </copyright>
 # <summary>
@@ -25,15 +25,15 @@
 
 module GroupDocsAnnotationCloud
   #
-  # ApiError class for error handling
+  # ApiClientError class for error handling
   #
-  class ApiError < StandardError
+  class ApiClientError < StandardError
     attr_reader :code
     attr_reader :message
 
     # Usage examples:
-    #   ApiError.new
-    #   ApiError.new(:code => 500, :response_body => "")
+    #   ApiClientError.new
+    #   ApiClientError.new(:code => 500, :response_body => "")
     def initialize(arg = nil)
       if arg.is_a? Hash
         
