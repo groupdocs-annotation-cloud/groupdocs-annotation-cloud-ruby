@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------------
 # <copyright company="Aspose Pty Ltd" file="groupdocs_annotation_cloud.rb">
-#   Copyright (c) 2003-2023 Aspose Pty Ltd
+#   Copyright (c) Aspose Pty Ltd
 # </copyright>
 # <summary>
 #  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -33,6 +33,8 @@ require_relative 'groupdocs_annotation_cloud/configuration'
 require_relative 'groupdocs_annotation_cloud/models/annotate_options'
 require_relative 'groupdocs_annotation_cloud/models/annotation_info'
 require_relative 'groupdocs_annotation_cloud/models/annotation_reply_info'
+require_relative 'groupdocs_annotation_cloud/models/api_error'
+require_relative 'groupdocs_annotation_cloud/models/api_error_response'
 require_relative 'groupdocs_annotation_cloud/models/consumption_result'
 require_relative 'groupdocs_annotation_cloud/models/disc_usage'
 require_relative 'groupdocs_annotation_cloud/models/document_info'
